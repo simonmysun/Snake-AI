@@ -1,15 +1,14 @@
 function init() {
-    console.log("init");
-    d = "right";
+    keyboardDirection = "right";
     createSnake();
     createFood();
     score = 0;
-    step = 0;
+    tick = 0;
+    window.eval($("#ai").val());
     loop();
 }
 
 function createSnake() {
-    console.log("create snake");
     var length = 5;
     snake = [];
     for(var i = length - 1; i >= 0 ; i -- ) {
@@ -21,7 +20,6 @@ function createSnake() {
 }
 
 function createFood() {
-    console.log("create food");
     food = {
 	x: Math.round(Math.random() * (w - cw) / cw)
 	,y: Math.round(Math.random() * (h - cw) / cw)
@@ -32,7 +30,6 @@ function createFood() {
 }
 
 function paint() {
-    console.log("paint");
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, w, h);
     ctx.strokeStyle = "grey";
@@ -56,9 +53,10 @@ function paint() {
 }
 
 function loop() {
-    console.log("loop, " + step);
-    step ++ ;
-    action = think();
+    tick ++ ;
+    action = think(snake,food);
+    res = action;
+    console.log(action);
     var nx = snake[0].x;
     var ny = snake[0].y;
     
@@ -91,6 +89,7 @@ function loop() {
 	snake.push(tail);
     }
     paint();
+    _log();
     setTimeout(loop, 60);
 }
 
@@ -103,26 +102,27 @@ function checkCollision(x, y, arr) {
     return false;
 }
 
+function _log() {
+    var strLog = '';
+    strLog = strLog.concat('Score: ' + score.toString() + '\n');
+    strLog = strLog.concat('Ticks passed: ' + tick.toString() + '\n');
+    $('#results').text(strLog);
+}
+
 $(document).keydown(function(e) {
     var key = e.which;
     if(key == "66" && res!= "right") {
-	d = "left";
+	keyboardDirection = "left";
     } else if(key == "80" && res!= "down") {
-	d = "up";
+	keyboardDirection = "up";
     } else if(key == "70" && res!= "left") {
-	d = "right";
+	keyboardDirection = "right";
     } else if(key == "78" && res!= "up") {
-	d = "down";
+	keyboardDirection = "down";
     }
 });
 
 function think() {
-    eval($("#ai").val());
-    return res;
-}
-
-function manual() {
-    res = d;
 }
 
 $(document).ready(function() {
@@ -135,7 +135,7 @@ $(document).ready(function() {
     d = "";
     food = {};
     score = 0;
-    step = 0;
+    tick = 0;
 
     res = 0;
 
@@ -149,7 +149,7 @@ $(document).ready(function() {
     });
 
     codeExample = [
-	'		manual();\n		// use p, n, b, f to control (just like emacs)'
+	'function think() {\n    return keyboardDirection;\n}\n'
 	,''
 	,''
     ]
@@ -159,4 +159,5 @@ $(document).ready(function() {
     })
 
     paint();
+    _log();
 })
