@@ -111,13 +111,13 @@ function _log() {
 
 $(document).keydown(function(e) {
     var key = e.which;
-    if(key == "66" && res!= "right") {
+    if((key == "66" || key == "h" || key == "37") && res!= "right") {
 	keyboardDirection = "left";
-    } else if(key == "80" && res!= "down") {
+    } else if((key == "80" || key == "75" || key == "38") && res!= "down") {
 	keyboardDirection = "up";
-    } else if(key == "70" && res!= "left") {
+    } else if((key == "70" || key == "76" || key == "39") && res!= "left") {
 	keyboardDirection = "right";
-    } else if(key == "78" && res!= "up") {
+    } else if((key == "78" || key == "74" || key == "40" ) && res!= "up") {
 	keyboardDirection = "down";
     }
 });
@@ -160,4 +160,4 @@ $(document).ready(function() {
 
     paint();
     _log();
-})
+});
