@@ -54,9 +54,8 @@ function paint() {
 
 function loop() {
     tick ++ ;
-    action = think(snake,food);
+    action = think({snake:snake,food:food,width:w,height:h});
     res = action;
-    console.log(action);
     var nx = snake[0].x;
     var ny = snake[0].y;
     
@@ -122,7 +121,7 @@ $(document).keydown(function(e) {
     }
 });
 
-function think() {
+function think(snake, food, width, height) {
 }
 
 $(document).ready(function() {
@@ -140,23 +139,6 @@ $(document).ready(function() {
     res = 0;
 
     snake = [];
-
-    $('#btn-start').click(function() {
-	init();
-    });
-    $('#btn-clear').click(function() {
-	$('#ai').val('');
-    });
-
-    codeExample = [
-	'function think() {\n    return keyboardDirection;\n}\n'
-	,''
-	,''
-    ]
-
-    $('#ai-examples').change(function() {
-	$('#ai').val(codeExample[$('#ai-examples').get(0).selectedIndex]);
-    })
 
     paint();
     _log();
