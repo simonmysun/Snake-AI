@@ -40,13 +40,10 @@
 	<div class="col-xs-12 col-sm-5 col-md-6 col-lg-7">
 	  <div id="ai-box">
 	    <textarea id="ai">
-function think(game) {
-    return keyboardDirection;
-}
 	    </textarea>
 	    <div class="form-inline" id="operator" style="text-align: right;">
 	      <label>
-		<input id="watch-mode" type="checkbox" value="">
+		<input id="watch-mode" type="checkbox" value="" checked="checked">
 		Watch mode
 	      </label>
 	      <a class="btn btn-primary" id="btn-start">
@@ -57,9 +54,9 @@ function think(game) {
 	      </a>
 	      <select class="form-control" id="ai-examples">
 		<option>Manual</option>
- 		<option>BFS</option>
+ 		<option>DFS</option>
+		<option>BFS</option>
 		<option>BFS + Wander</option>
-		<option>4</option>
 		<option>5</option>
 	      </select>
 	    </div>
