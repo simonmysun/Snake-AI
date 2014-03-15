@@ -7,15 +7,20 @@ function init() {
     score = 0;
     tick = 0;
 
-    createThink = undefined;
-    think = undefined;
+    //createThink = undefined;
+    //think = undefined;
 
-    window.eval($("#ai").val());
+    window.eval($('#ai').val());
 
-    if(typeof createThink != "function") {
-	alert("Bad AI");
+    if(typeof createThink != 'function') {
+	alert('Bad AI');
 	return;
     }
+
+    $('#results').each(function() {
+	$(this).attr('id','');
+	$(this).after('<div id="results"></div>');
+    });
 
     think = createThink();
     loop();

@@ -25,3 +25,8 @@
 
 #playground {
 }
+
+#result-log {
+    height: 300px;
+    overflow-y: scroll;
+}
