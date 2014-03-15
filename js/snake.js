@@ -6,7 +6,17 @@ function init() {
     createFood();
     score = 0;
     tick = 0;
+
+    createThink = undefined;
+    think = undefined;
+
     window.eval($("#ai").val());
+
+    if(typeof createThink != "function") {
+	alert("Bad AI");
+	return;
+    }
+
     think = createThink();
     loop();
 }
@@ -57,6 +67,7 @@ function paint() {
 
 function loop() {
     tick ++ ;
+
     action = think({
 	snake: snake
 	,food: food
@@ -128,113 +139,6 @@ $(document).keydown(function(e) {
 	keyboardDirection = "down";
     }
 });
-
-function createThink() {
-    var minMap;
-    var nextFood;
-
-    function clearMap() {
-	for(var x in minMap) {
-	    for(var y in minMap[x]) {
-		minMap[x][y] = 99999999;
-	    }
-	}
-    }
-
-    function legal(x, y, game) {
-	if(x >= game.width || x <= -1 || y >= game.height || y <= -1) {
-	    return false;
-	} else {
-	    return true;
-	}
-    }
-
-    function bfs(loc, dist, game) {
-	if(legal(loc.x, loc.y, game) == false) {
-	    return -1;
-	}
-	if(checkCollision(loc.x, loc.y, game.snake)) {
-	    return -1; 
-	}
-	if(minMap[loc.x][loc.y] != 99999999) {
-	    return minMap[loc.x][loc.y];
-	}
-	minMap[loc.x][loc.y] = dist + 1;
-	bfs({
-	    x: loc.x
-	    ,y: loc.y - 1
-	}, dist + 1,  game);
-	bfs({
-	    x: loc.x
-	    ,y: loc.y + 1
-	}, dist + 1,  game);
-	bfs({
-	    x: loc.x - 1
-	    ,y: loc.y
-	}, dist + 1,  game);
-	bfs({
-	    x: loc.x + 1
-	    ,y: loc.y
-	}, dist + 1,  game);
-    }
-
-    return function(game) {
-	head = game.snake[0];
-	if(nextFood == undefined) {
-	    nextFood = game.food;
-	}
-	if(minMap == undefined) {
-	    minMap = [];
-	    for(var x = 0; x < game.width; x ++ ) {
-		minMap[x] = [];
-		for(var y = 0; y < game.height; y ++ ) {
-		    minMap[x][y] = 99999999;
-		}
-	    }
-	    bfs(game.food, 0, game);
-	}
-	if(game.food.x != nextFood.x && game.food.y != nextFood.y) {
-	    clearMap();
-	    bfs(game.food, 0, game);
-	    nextFood = game.food;
-	}
-	var minDirect = "right";
-	var minDist = 99999999;
-	if(legal(head.x + 1, head.y, game)) {
-	    if(checkCollision(head.x + 1, head.y, game.snake) == false) {
-		if(minDist >  minMap[head.x + 1][head.y]) {
-		    minDirect = "right";
-		    minDist = minMap[head.x + 1][head.y];
-		}
-	    }
-	}
-	if(legal(head.x - 1, head.y, game)) {
-	    if(checkCollision(head.x - 1, head.y, game.snake) == false) {
-		if(minDist >  minMap[head.x - 1][head.y]) {
-		    minDirect = "left";
-		    minDist = minMap[head.x - 1][head.y];
-		}
-	    }
-	}
-	if(legal(head.x, head.y + 1, game)) {
-	    if(checkCollision(head.x, head.y + 1, game.snake) == false) {
-		if(minDist >  minMap[head.x][head.y + 1]) {
-		    minDirect = "down";
-		    minDist = minMap[head.x][head.y + 1];
-		}
-	    }
-	}
-	if(legal(head.x, head.y - 1, game)) {
-	    if(checkCollision(head.x, head.y - 1, game.snake) == false) {
-		if(minDist >  minMap[head.x][head.y - 1]) {
-		    minDirect = "up";
-		    minDist = minMap[head.x][head.y - 1];
-		}
-	    }
-	}
-	return minDirect;
-    };
-}
 
 $(document).ready(function() {
     canvas = $('#playground')[0];
