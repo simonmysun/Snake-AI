@@ -1,5 +1,18 @@
 var period = 60;
 
+function showShare() {
+    getUrl(window.location.href, function(res) {
+        var msgEn = 'I\'ve scored ' + score + ' on snake game, with my AI code. Someone challenging me? ';
+        $('#twitter-share').attr('href', 'https://twitter.com/intent/tweet?button_hashtag=SnakeAI&text=' + msgEn);
+        $('#twitter-share').attr('data-url', res);
+        var msgCn = '#贪吃蛇AI#我的贪吃蛇 AI 脚本刚刚得了 ' + score + ' 分, 有人来围观/挑战我的代码么?  -> ' + res;
+        $('#weibo-share').attr('default_text', msgCn);
+        $('#share-cn').text(msgCn);
+        $('#share-en').text(msgEn);
+        $('#modal-share').modal('show');
+    });
+}
+
 $(document).ready(function() {
 
     canvas = $('#playground')[0];
