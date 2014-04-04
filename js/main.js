@@ -5,7 +5,7 @@ function showShare() {
         var msgEn = 'I\'ve scored ' + score + ' on snake game, with my AI code. Someone challenging me? ';
         $('#twitter-share').attr('href', 'https://twitter.com/intent/tweet?button_hashtag=SnakeAI&text=' + msgEn);
         $('#twitter-share').attr('data-url', res);
-        var msgCn = '#Ì°³ÔÉßAI#ÎÒµÄÌ°³ÔÉß AI ½Å±¾¸Õ¸ÕµÃÁË ' + score + ' ·Ö, ÓÐÈËÀ´Î§¹Û/ÌôÕ½ÎÒµÄ´úÂëÃ´?  -> ' + res;
+        var msgCn = '#è´ªåƒè›‡AI#æˆ‘çš„è´ªåƒè›‡ AI è„šæœ¬åˆšåˆšå¾—äº† ' + score + ' åˆ†, æœ‰äººæ¥å›´è§‚/æŒ‘æˆ˜æˆ‘çš„ä»£ç ä¹ˆ?  -> ' + res;
         $('#weibo-share').attr('default_text', msgCn);
         $('#share-cn').text(msgCn);
         $('#share-en').text(msgEn);
