@@ -2,7 +2,23 @@ var period = 60;
 
 $(document).ready(function() {
 
+    canvas = $('#playground')[0];
+    ctx = canvas.getContext("2d");
+    w = $('#playground').width();
+    h = $('#playground').height();
+
+    cw = 16;
+    d = "";
+    food = {};
+    score = 0;
+    tick = 0;
+    steps = 10000;
+    totScore = 0;
+
     $('#btn-start').click(function() {
+        score = 0;
+        tick = 0;
+        totScore = 0;
 	init();
     });
     $('#btn-clear').click(function() {
@@ -23,5 +39,31 @@ $(document).ready(function() {
 	$('#ai').val(codeExample[$('#ai-examples').get(0).selectedIndex]);
     });
     $('#ai-examples').change();
+    
+    $('#ai-script').html("<textarea id='ai' placeholder='Your AI Script Here'>" + (unescape((location).hash.slice(1,-1)).split("\x7F")[0]||"") + "</textarea>");
+    onload = onkeyup = function(a) {
+        var js = $('#ai').val();
+        document.location.hash = [js].join("\x7f") + 1;
+        Input = js ? "<script>" + js + "<\/script>" : "<pre>You haven\'t input any code yet. </pre>";
+    }
+    res = 0;
 
+    snake = [];
+
+    paint();
+    _log();
+});
+
+
+$(document).keydown(function(e) {
+    var key = e.which;
+    if((key == "66" || key == "h" || key == "37") && res!= "right") {
+	keyboardDirection = "left";
+    } else if((key == "80" || key == "75" || key == "38") && res!= "down") {
+	keyboardDirection = "up";
+    } else if((key == "70" || key == "76" || key == "39") && res!= "left") {
+	keyboardDirection = "right";
+    } else if((key == "78" || key == "74" || key == "40" ) && res!= "up") {
+	keyboardDirection = "down";
+    }
 });
