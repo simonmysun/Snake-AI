@@ -3,12 +3,9 @@ var period = 60;
 function showShare() {
     getUrl(window.location.href, function(res) {
         $('#share-qr').attr('src',res + '.qr');
-        var msgEn = "My AI script scored " + totScore + " on snake game. Someone challenging me? ";
-        $('#twitter-share').attr('href', 'https://twitter.com/intent/tweet?button_hashtag=SnakeAI&text=' + escape(msgEn));
-        $('#twitter-share').attr('data-url', res);
+        var msgEn = "My AI script scored " + totScore + " on snake game. Someone challenging me? -> " + res;
         $('#share-en').text(msgEn);
         var msgCn = '#贪吃蛇AI#我的贪吃蛇 AI 脚本刚刚得了 ' + totScore + ' 分, 有人来围观/挑战我的代码么?  -> ' + res;
-        $('#weibo-share').attr('default_text', escape(msgCn));
         $('#share-cn').text(msgCn);
         $('#modal-share').modal('show');
     });

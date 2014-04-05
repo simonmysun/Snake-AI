@@ -99,8 +99,10 @@ function loop() {
         totScore += score * score;
         if(tick <= steps) {
             score = 0;
-            //init();
-            showShare();
+            init();
+            if(tick >= steps) {
+                showShare();
+            }
         }
 	return;
     }
