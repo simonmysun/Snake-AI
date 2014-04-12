@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Snake-AI | 中国海洋大学 “华为杯”第三届程序设计竞赛 - 第二轮</title>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="./../css/bootstrap.min.css" rel="stylesheet">
+    <link href="./../css/style.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="jumbotron">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8">
+	    <h1>
+	      Snake AI
+	    </h1>
+	    <p class="lead">
+	      A sandbox for testing AI code of snake game
+	    </p>
+	    <p>
+	      <a class="btn btn-lg btn-success" href="/Snake-AI/intro/" role="button">
+	        Learn more
+	      </a>
+	    </p>
+          </div>
+          <div class="col-sm-4">
+            <img src="./../img/huaweilogo.png" class="img-responsive" style="height: 233px;">
+          </div>
+        </div>
+        <ul class="nav nav-tabs">
+          <li><a href="/Snake-AI/">Home</a></li>
+          <li class="active"><a href="/Snake-AI/intro/">Intro</a></li>
+          <li><a href="/Snake-AI/game/">Sandbox</a></li>
+          <li><a href="/Snake-AI/LICENCE">Licience</a></li>
+        </ul>
+      </div>
+    </div>
+    
+
+<div class="container">
+<div id="edit-page-preview-body"><div class="content"><h1>贪吃蛇人工智能算法评测平台</h1>
+<p>一个可以评测应用于贪吃蛇的智能算法的沙箱程序. </p>
+<h2>背景</h2>
+<h2>规则</h2>
+<ol>
+<li>游戏由各个回合组成, 选手的 AI 脚本将被一共调用 <code>10000</code> 次和最多共 <code>300</code> 秒的时间. "回合分数"和"总分数"将被用来评价选手的 AI 脚本. <pre><code> var steps = 10000;
+ var time = 300 * 1000;
+ var score = 0;
+ var totScore = 0;</code></pre>
+</li>
+<li>每回合由一个移动场, 一个方格的食物和一条蛇组成, 回合开始时, 回合分数奖杯设为 <code>0</code>. <pre><code> score = 0;
+ createSnake();
+ createFood();
+ loop();</code></pre>
+</li>
+<li>移动场(贪吃蛇的活动)范围是一个宽为 <code>w</code>, 高为 <code>h</code> 的网格平面. <pre><code> var w, h;</code></pre>
+</li>
+<li>游戏过程中一直会有 <code>1</code> 个格子放置食物. 食物的位置不与贪吃蛇占用的位置冲突. <pre><code> var newFood = {
+     x: Math.round(Math.random() * (self.w - 1))
+     ,y: Math.round(Math.random() * (self.h - 1))
+ };
+ while(self.check(newFood) == false) {
+     newFood = {
+         x: Math.round(Math.random() * (self.w - 1))
+         ,y: Math.round(Math.random() * (self.h - 1))
+         };
+ }
+ food.push(newFood);</code></pre>
+</li>
+<li>选手控制的蛇被定义为一个格子链. 回合开始时蛇的长度为 5 个格子. 蛇头放置于 <code>(4, 0)</code> 蛇尾放置于 <code>(0, 0)</code>, <pre><code> var snake = [];
+ for(var i = 5 - 1; i &gt;= 0 ; i -- ) {
+     snake.push({
+         x: i
+         ,y: 0
+     });
+ }</code></pre>
+</li>
+<li>在每一步选手选择一个不与当前方向相反的方向, 蛇头将沿此方向前进, 蛇身跟随着. <pre><code> var action = think(game);
+ var res = move(action);
+ var tail = snake.pop();
+ snake.unshift({
+     x: res.x
+     ,y: res.y
+ });</code></pre>
+</li>
+<li>如果蛇头占用了食物方格, 蛇长将增加 <code>1</code>, 即蛇尾将不前进, 回合得分增加 <code>1</code>. <pre><code> if(res.x == food.x &amp;&amp; res.y == food.y) {
+     score ++ ;
+     snake.push(tail);
+     snake.food.pop();
+     createFood();
+ }</code></pre>
+</li>
+<li>如果蛇尝试走进自己的身体或移动场外或进行第 100001 次移动蛇将死亡. 一旦蛇死亡汇合将结束, 总分增加汇合得分的平方. <pre><code> if(check(res) || tick &gt; steps) {
+     totScore += score * score;
+     if(tick &lt;= steps) {
+         score = 0;
+         init();
+         if(tick &gt;= steps) {
+             showShare();
+         }
+     }
+     return;
+ }</code></pre>
+</li>
+</ol>
+<h2>参赛入门</h2>
+<h3>选手应该提供什么?</h3>
+<p>选手应提供一个闭包函数. 该函数将在游戏开始时被载入并运行. 函数应以运动场的大小信息 <code>w</code> 和 <code>h</code> 为参数, 函数名应为 <code>createThink</code>, 并返回每次移动前调用的思考函数. 返回的函数应以游戏状态为参数, 将在每次移动前调用. </p>
+<pre><code>    function createThink(w, h) {
+        ...
+        var think = function(game) {
+            ...
+        }
+        return think;
+    }</code></pre>
+<p>或者使用匿名函数. </p>
+<pre><code>    function createThink(w, h) {
+        ...
+        return function(game) {
+            ...
+        }
+    }</code></pre>
+<p>函数 <code>createThink</code> 在游戏开始时将被调用. </p>
+<pre><code>    var think = new createThink(w, h);</code></pre>
+<h4>例子</h4>
+<p>写一个向右向下行进的 AI 脚本: </p>
+<pre><code>    function createThink(w, h) {
+        var dir = 'right'
+        return function(game) {
+            if(dir === 'right') {
+                dir = 'down';
+                return dir;
+            } else {
+                dir = 'right';
+                return dir;
+            }
+        }
+    }</code></pre>
+<p>这里返回的函数 <code>think</code> 将在每次移动前调用. </p>
+<h3>选手可以使用什么?</h3>
+<p><code>w</code> 和 <code>h</code> 将在游戏开始是提供, 游戏状态将在每次调用智能脚本时调用. </p>
+<p>游戏状态是一个对象, 包括蛇的信息, 食物的信息和一些接口函数. </p>
+<pre><code>    {
+        snake: [
+            {
+                x: ...
+                ,y: ...
+            }
+            ,{
+                x: ...
+                ,y: ...
+            }
+            ,{
+                x: ...
+                ,y: ...
+            }
+            ...
+        ]
+        ,food: {
+            x: ...
+            ,y: ...
+        }
+    }</code></pre>
+<p>接口函数详见接口文档. </p>
+<h2>FAQ</h2>
+<h2>关于</h2>
+<p>作者: Simonmysun</p>
+<p>鸣谢: </p>
+<h2>Licience</h2>
+<p>MIT</p>
+</div></div>
+</div>
+    <script src="./../js/jquery-2.0.3.min.js"></script>
+    <script src="./../js/bootstrap.min.js"></script>
+  </body>
+</html>

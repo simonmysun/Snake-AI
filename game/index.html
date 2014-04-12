@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Snake-AI</title>
+    <title>Snake-AI | 中国海洋大学 “华为杯”第三届程序设计竞赛 - 第二轮</title>
     <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="./../css/bootstrap.min.css" rel="stylesheet">
     <link href="./../css/style.css" rel="stylesheet">
+    <link href="./../css/odometer-theme-train-station.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -18,17 +19,30 @@
   <body>
     <div class="jumbotron">
       <div class="container">
-	<h1>
-	  Snake AI
-	</h1>
-	<p class="lead">
-	  A sandbox for testing AI code of snake game
-	</p>
-	<p>
-	  <a class="btn btn-lg btn-success" href="#about" role="button">
-	    Learn more
-	  </a>
-	</p>
+        <div class="row">
+          <div class="col-sm-8">
+	    <h1>
+	      Snake AI
+	    </h1>
+	    <p class="lead">
+	      A sandbox for testing AI code of snake game
+	    </p>
+	    <p>
+	      <a class="btn btn-lg btn-success" href="/Snake-AI/intro/" role="button">
+	        Learn more
+	      </a>
+	    </p>
+          </div>
+          <div class="col-sm-4">
+            <img src="./../img/huaweilogo.png" class="img-responsive" style="height: 233px;">
+          </div>
+        </div>
+        <ul class="nav nav-tabs">
+          <li><a href="/Snake-AI/">Home</a></li>
+          <li><a href="/Snake-AI/intro/">Intro</a></li>
+          <li class="active"><a href="/Snake-AI/game/">Sandbox</a></li>
+          <li><a href="/Snake-AI/LICENCE">Licience</a></li>
+        </ul>
       </div>
     </div>
     <div class="container">
@@ -36,22 +50,28 @@
 	<div class="col-xs-12 col-sm-7 col-md-6 col-lg-5">
 	  <div id="playground-box">
 	    <canvas id="playground" width="320" height="240"></canvas>
+            <div style="display:block; width: 100%; text-align: center;">
+              Score: <div id="score" class="odometer train-station"></div>.
+            </div>
 	  </div>
 	</div>
 	<div class="col-xs-12 col-sm-5 col-md-6 col-lg-7">
 	  <div id="ai-box">
             <div id="ai-script">
+              <textarea id="ai"></textarea>
             </div>
 	    <div class="form-inline" id="operator" style="text-align: right;">
-	      <label>
-		<input id="watch-mode" type="checkbox" value="" checked="checked">
-		Watch mode
-	      </label>
-	      <a class="btn btn-primary" id="btn-start">
+	      <a class="btn btn-default" id="btn-mode">
+                Toggle mode
+              </a>
+	      <a class="btn btn-primary" id="btn-load">
+		Load
+	      </a>
+	      <a class="btn btn-success" id="btn-start">
 		Start
 	      </a>
-	      <a class="btn btn-danger" id="btn-clear">
-		Clear
+	      <a class="btn btn-danger" id="btn-reset">
+		Reset
 	      </a>
 	      <select class="form-control" id="ai-examples">
 		<option>Manual</option>
@@ -115,6 +135,8 @@
     
     <script src="./../js/jquery-2.0.3.min.js"></script>
     <script src="./../js/bootstrap.min.js"></script>
+    <script src="./../js/base64.js"></script>
+    <script src="./../js/odometer.js"></script>
     <script src="./../js/snake.js"></script>
     <script src="./../js/main.js"></script>
     <script src="https://apis.google.com/js/client.js?onload=load"></script>

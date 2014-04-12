@@ -1,4 +1,18 @@
-var period = 60;
+var delay = 60;
+var keyboardDirection = '';
+var codeExample = [
+    ''
+    ,''
+    ,''
+    ,''
+];
+
+var worker;
+var time;
+var running;
+var sign;
+
+var snake = new Snake();
 
 function showShare() {
     getUrl(window.location.href, function(res) {
@@ -11,70 +25,164 @@ function showShare() {
     });
 }
 
-$(document).ready(function() {
-
-    canvas = $('#playground')[0];
-    ctx = canvas.getContext("2d");
-    w = $('#playground').width();
-    h = $('#playground').height();
-
-    cw = 16;
-    d = "";
-    food = {};
-    score = 0;
-    tick = 0;
-    steps = 10000;
-    totScore = 0;
-
-    $('#btn-start').click(function() {
-        score = 0;
-        tick = 0;
-        totScore = 0;
-	init();
-    });
-    $('#btn-clear').click(function() {
-	$('#ai').val('');
-    });
-    $('#watch-mode').click(function() {
-	period ^= 60;
-    });
-
-    codeExample = [
-	'function createThink() {\n    var a, b, c;\n    return function(game) {\n	return keyboardDirection;\n    };\n}'
-	,'function createThink() {\n    var minMap;\n    var nextFood;\n\n    function clearMap() {\n    for(var x in minMap) {\n        for(var y in minMap[x]) {\n        minMap[x][y] = 99999999;\n        }\n    }\n    }\n\n    function legal(x, y, game) {\n    if(x >= game.width || x <= -1 || y >= game.height || y <= -1) {\n        return false;\n    } else {\n        return true;\n    }\n    }\n\n    function dfs(loc, dist, game) {\n    if(legal(loc.x, loc.y, game) == false) {\n        return -1;\n    }\n    if(checkCollision(loc.x, loc.y, game.snake)) {\n        return -1; \n    }\n    if(minMap[loc.x][loc.y] != 99999999) {\n        return minMap[loc.x][loc.y];\n    }\n    minMap[loc.x][loc.y] = dist + 1;\n    dfs({\n        x: loc.x\n        ,y: loc.y - 1\n    }, dist + 1,  game);\n    dfs({\n        x: loc.x\n        ,y: loc.y + 1\n    }, dist + 1,  game);\n    dfs({\n        x: loc.x - 1\n        ,y: loc.y\n    }, dist + 1,  game);\n    dfs({\n        x: loc.x + 1\n        ,y: loc.y\n    }, dist + 1,  game);\n    }\n\n    return function(game) {\n    head = game.snake[0];\n    if(nextFood == undefined) {\n        nextFood = game.food;\n    }\n    if(minMap == undefined) {\n        minMap = [];\n        for(var x = 0; x < game.width; x ++ ) {\n        minMap[x] = [];\n        for(var y = 0; y < game.height; y ++ ) {\n            minMap[x][y] = 99999999;\n        }\n        }\n        dfs(game.food, 0, game);\n    }\n    if(game.food.x != nextFood.x && game.food.y != nextFood.y) {\n        clearMap();\n        dfs(game.food, 0, game);\n        nextFood = game.food;\n    }\n    var minDirect = "right";\n    var minDist = 99999999;\n    if(legal(head.x + 1, head.y, game)) {\n        if(checkCollision(head.x + 1, head.y, game.snake) == false) {\n        if(minDist >  minMap[head.x + 1][head.y]) {\n            minDirect = "right";\n            minDist = minMap[head.x + 1][head.y];\n        }\n        }\n    }\n    if(legal(head.x - 1, head.y, game)) {\n        if(checkCollision(head.x - 1, head.y, game.snake) == false) {\n        if(minDist >  minMap[head.x - 1][head.y]) {\n            minDirect = "left";\n            minDist = minMap[head.x - 1][head.y];\n        }\n        }\n    }\n    if(legal(head.x, head.y + 1, game)) {\n        if(checkCollision(head.x, head.y + 1, game.snake) == false) {\n        if(minDist >  minMap[head.x][head.y + 1]) {\n            minDirect = "down";\n            minDist = minMap[head.x][head.y + 1];\n        }\n        }\n    }\n    if(legal(head.x, head.y - 1, game)) {\n        if(checkCollision(head.x, head.y - 1, game.snake) == false) {\n        if(minDist >  minMap[head.x][head.y - 1]) {\n            minDirect = "up";\n            minDist = minMap[head.x][head.y - 1];\n        }\n        }\n    }\n    return minDirect;\n    };\n}\n'
-	,'function createThink() {\n    var minMap;\n    var nextFood;\n    var bfsqueue;\n\n    function clearMap() {\n    for(var x in minMap) {\n        for(var y in minMap[x]) {\n        minMap[x][y] = 99999999;\n        }\n    }\n    }\n\n    function legal(x, y, game) {\n    if(x >= game.width || x <= -1 || y >= game.height || y <= -1) {\n        return false;\n    } else {\n        return true;\n    }\n    }\n\n    function bfs(loc, game) {\n    bfsqueue = [];\n    bfsqueue.push({\n        x: loc.x\n        ,y: loc.y\n        ,dist: 0\n    });\n    while(bfsqueue.length > 0) {\n        loc = bfsqueue.shift();\n        if(legal(loc.x, loc.y, game) == false) {\n        continue;\n        }\n        if(checkCollision(loc.x, loc.y, game.snake)) {\n        minMap[loc.x][loc.y] = -1;\n        continue;\n        }\n        if(minMap[loc.x][loc.y] != 99999999) {\n        continue;\n        }\n        minMap[loc.x][loc.y] = loc.dist;\n        bfsqueue.push({\n        x: loc.x\n        ,y: loc.y - 1\n        ,dist: loc.dist + 1\n        });\n        bfsqueue.push({\n        x: loc.x\n        ,y: loc.y + 1\n        ,dist: loc.dist + 1\n        });\n        bfsqueue.push({\n        x: loc.x - 1\n        ,y: loc.y\n        ,dist: loc.dist + 1\n        });\n        bfsqueue.push({\n        x: loc.x + 1\n        ,y: loc.y\n        ,dist: loc.dist + 1\n        });\n    }\n    }\n\n    return function(game) {\n    head = game.snake[0];\n    if(nextFood == undefined) {\n        nextFood = game.food;\n    }\n    if(minMap == undefined) {\n        minMap = [];\n        for(var x = 0; x < game.width; x ++ ) {\n        minMap[x] = [];\n        for(var y = 0; y < game.height; y ++ ) {\n            minMap[x][y] = 99999999;\n        }\n        }\n        bfs(game.food, game);\n    }\n    if(game.food.x != nextFood.x || game.food.y != nextFood.y) {\n        clearMap();\n        bfs(game.food, game);\n        nextFood = game.food;\n    }\n    var minDirect = "right";\n    var minDist = 99999999;\n    if(legal(head.x + 1, head.y, game)) {\n        if(checkCollision(head.x + 1, head.y, game.snake) == false) {\n        if(minDist > minMap[head.x + 1][head.y] && minMap[head.x + 1][head.y] != -1) {\n            minDirect = "right";\n            minDist = minMap[head.x + 1][head.y];\n        }\n        }\n    }\n    if(legal(head.x - 1, head.y, game)) {\n        if(checkCollision(head.x - 1, head.y, game.snake) == false) {\n        if(minDist > minMap[head.x - 1][head.y] && minMap[head.x - 1][head.y] != -1) {\n            minDirect = "left";\n            minDist = minMap[head.x - 1][head.y];\n        }\n        }\n    }\n    if(legal(head.x, head.y + 1, game)) {\n        if(checkCollision(head.x, head.y + 1, game.snake) == false) {\n        if(minDist > minMap[head.x][head.y + 1] && minMap[head.x][head.y + 1] != -1) {\n            minDirect = "down";\n            minDist = minMap[head.x][head.y + 1];\n        }\n        }\n    }\n    if(legal(head.x, head.y - 1, game)) {\n        if(checkCollision(head.x, head.y - 1, game.snake) == false) {\n        if(minDist > minMap[head.x][head.y - 1] && minMap[head.x][head.y - 1] != -1) {\n            minDirect = "up";\n            minDist = minMap[head.x][head.y - 1];\n        }\n        }\n    }\n    return minDirect;\n    };\n}\n'
-	,''
-    ];
-
-    $('#ai-examples').change(function() {
-	$('#ai').val(codeExample[$('#ai-examples').get(0).selectedIndex]);
-    });
-    $('#ai-examples').change();
-    
-    $('#ai-script').html("<textarea id='ai' placeholder='Your AI Script Here'>" + (unescape((location).hash.slice(1,-1)).split("\x7F")[0]||"") + "</textarea>");
-    onload = onkeyup = function(a) {
-        var js = $('#ai').val();
-        document.location.hash = [js].join("\x7f") + 1;
-        Input = js ? "<script>" + js + "<\/script>" : "<pre>You haven\'t input any code yet. </pre>";
+function deepClone(obj) {
+    var buffer;
+    if(obj instanceof Array) {
+        buffer = [];
+        var i = obj.length;
+        while(i--) {
+            buffer[i] = deepClone(obj[i]);
+        }
+        return buffer;
+    } else if (obj instanceof Object) {
+        buffer = {};
+        for(var k in obj) {
+            buffer[k] = deepClone(obj[k]);
+        }
+        return buffer;
+    } else {
+        return obj;
     }
-    res = 0;
-
-    snake = [];
-
-    paint();
-    _log();
-});
-
+}
 
 $(document).keydown(function(e) {
     var key = e.which;
-    if((key == "66" || key == "h" || key == "37") && res!= "right") {
-	keyboardDirection = "left";
-    } else if((key == "80" || key == "75" || key == "38") && res!= "down") {
+    if(key == '66' || key == 'h' || key == '37') {
+	keyboardDirection = 'left';
+    } else if(key == '80' || key == '75' || key == '38') {
 	keyboardDirection = "up";
-    } else if((key == "70" || key == "76" || key == "39") && res!= "left") {
+    } else if(key == "70" || key == "76" || key == "39") {
 	keyboardDirection = "right";
-    } else if((key == "78" || key == "74" || key == "40" ) && res!= "up") {
+    } else if(key == "78" || key == "74" || key == "40") {
 	keyboardDirection = "down";
     }
+});
+
+function updateUrl() {
+    var js = $('#ai').val();
+    document.location.hash = Base64.encode([js].join("\x7f"));
+};
+
+onkeyup = updateUrl;
+
+function finish(snake) {
+    console.log(snake.totScore);
+}
+
+function loop() {
+    if(running) {
+        if(snake.tick < 10000) {
+            setTimeout(function() {
+                var state = {
+                    snake: snake.snake
+                    ,food: snake.food
+                };
+                sign = undefined;
+                worker.postMessage({
+                    type: 'game state'
+                ,data: deepClone(state)
+                });
+            }, delay);
+        } else {
+            snake.kill();
+            clearTimeout(time);
+            finish(snake);
+        }
+    }
+}
+
+function paint() {
+    var cw = width / 20;
+    ctx.fillStyle = '#111';
+    ctx.fillRect(0, 0, width, height);
+    ctx.fillStyle = '#333';
+    ctx.font = height + 'px Impact, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(snake.score.toString(), width / 2, height * .9);
+    for(var p in snake.snake) {
+	var x = snake.snake[p].x;
+	var y = snake.snake[p].y;
+	ctx.fillStyle = '#FFDC00';
+	ctx.fillRect(x * cw, y * cw, cw, cw);
+	ctx.strokeStyle = 'white';
+	ctx.strokeRect(x * cw, y * cw, cw, cw);
+    }
+    for(var p in snake.food) {
+	var x = snake.food[p].x;
+	var y = snake.food[p].y;
+        ctx.fillStyle = '#0074D9';
+        ctx.fillRect(x * cw, y * cw, cw, cw);
+        ctx.strokeStyle = 'white';
+        ctx.strokeRect(x * cw, y * cw, cw, cw);
+    }
+}
+
+$(document).ready(function() {
+    canvas = $('#playground')[0];
+    ctx = canvas.getContext("2d");
+    width = $('#playground').width();
+    height = $('#playground').height();
+    worker = new Worker('./../js/worker.js');
+    
+    $('#btn-load').click(function() {
+        var src = 'data:text/javascript;base64,' + Base64.encode($('#ai').val());
+        worker.terminate();
+        worker = new Worker('./../js/worker.js');
+        worker.postMessage({
+            type: 'url'
+            ,data: src
+        });
+        worker.onmessage = function(sdata) {
+            var data = sdata.data;
+            if(data.type === 'result') {
+                snake.loop(data.data);
+                paint();
+                $('#score').html(snake.totScore);
+            }
+            loop();
+        }
+        worker.onerror = function(e){
+            console.log(e.message);
+            console.log(e.lineno);
+            console.log(e.filename);
+        };
+    });
+    
+    $('#btn-start').click(function() {
+        running = true;
+        worker.postMessage({
+            type: 'init'
+            ,data: {
+                w: 20
+                ,h: 15
+            }
+        });
+        snake.init('game');
+        time = setTimeout(function() {
+            worker.terminate();
+            snake.kill();
+            finish(snake);
+            console.log('Time out. ');
+            running = false;
+        }, 300 * 1000);
+        loop();
+    });
+    
+    $('#btn-reset').click(function() {
+	$('#ai').val('');
+        worker.terminate();
+    });
+
+    $('#btn-mode').click(function() {
+	delay ^= 60;
+    });
+
+    $('#ai-examples').change(function() {
+	$('#ai').val(codeExample[$('#ai-examples').get(0).selectedIndex]);
+        updateUrl();
+    });
+
+    $('#ai').val(Base64.decode(unescape((location).hash).split("\x7F")[0]||""));
+    
+    paint();
 });
