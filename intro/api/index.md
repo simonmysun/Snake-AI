@@ -1,9 +1,9 @@
 ---
 layout: default
-title: �ӿ��ĵ�
+title: 接口文档
 ---
-## ȫ�ֱ���
-*ȫ�ֱ���**������**�Ƽ�ѡ��ʹ��. *
+## 全局变量
+*全局变量**几乎不**推荐选手使用. *
 ```
 	Infinity: Infinity
 	Array: function Array() { [native code] }
@@ -74,53 +74,53 @@ title: �ӿ��ĵ�
 	unescape: function unescape() { [native code] }
 	valueOf: function valueOf() { [native code] }
 ```
-����Ϊ��������õ�ȫ�ֱ���. ���� `Worker` ��ȫ�ֱ��������صļ���������, �Լ���ƽ̨ר�ñ���������޸���Ϸ���޷���������, ���Բ��ڴ��г�. 
-## ��Ϸ����
-�ƶ������� `w` �͸߶� `h` ��ѡ�ֽű���ʼ��ʱ��Ϊ��������. 
+以上为浏览器内置的全局变量. 另有 `Worker` 等全局变量有严重的兼容性问题, 以及本平台专用变量如果被修改游戏将无法继续运行, 所以不在此列出. 
+## 游戏环境
+移动场宽度 `w` 和高度 `h` 在选手脚本初始化时作为参数给出. 
 ```
-	var think = createThink(w, h); // ��Ϸƽ̨�ڳ�ʼ��ѡ�ֽű�ʱʹ�õ��﷨. 
+	var think = createThink(w, h); // 游戏平台在初始化选手脚本时使用的语法. 
 ```
-## ��Ϸ״̬
-��Ϸ״̬����ѡ�ֵĽű�������ʱ�� `Object` ����ʽ��Ϊ��������. 
+## 游戏状态
+游戏状态均在选手的脚本被调用时以 `Object` 的形式作为参数给出. 
 ```
-	var result = think(game); // ��Ϸƽ̨����ʱʹ�õ��﷨. 
+	var result = think(game); // 游戏平台调用时使用的语法. 
 ```
-### �����ʾ
-��������˵�������Ϊ����ʽ
+### 坐标表示
+下文中所说的坐标均为此形式
 ```
 	var location = {
-	    x: {{������}}
-	    ,y: {{������}}
+	    x: {{横坐标}}
+	    ,y: {{纵坐标}}
 	};
 ```
-### ̰����״̬
-̰����״̬Ϊһ�������������, �� `0` ��, ����Ϊ̰���߳���. 
+### 贪吃蛇状态
+贪吃蛇状态为一包含坐标的数组, 从 `0` 计, 长度为贪吃蛇长度. 
 ```
-	game.snake: [{{̰���߹ؽ�����}}, ... ]
+	game.snake: [{{贪吃蛇关节坐标}}, ... ]
 ```
-#### ����
-��ѯ̰����ͷ����β��������: 
+#### 例子
+查询贪吃蛇头部和尾部的坐标: 
 ```
 	var head = game.snake[0];
 	var tail = game.snake[game.snake.length - 1]
 ```
-### ʳ��״̬
-ʳ��״̬Ϊһ�������������, �� `0` ��, ����Ϊʳ�����. 
+### 食物状态
+食物状态为一包含坐标的数组, 从 `0` 计, 长度为食物个数. 
 ```
-	game.food: [{{ʳ������}}]
+	game.food: [{{食物坐标}}]
 ```
-*ע��: `game.food` Ϊһ������. ���ڱ��α�����ֻ������һ��ʳ�����. *
-#### ����
-��ѯʳ���*������*: 
+*注意: `game.food` 为一个数组. 但在本次比赛中只允许有一个食物格子. *
+#### 例子
+查询食物的*横坐标*: 
 ```
 	var foodX = game.food[0].x;
 ```
-## ѡ�ֿ��Ե��õĽӿ�
-1. ���λ���Ƿ�Ϸ��Ľӿ�
+## 选手可以调用的接口
+1. 检查位置是否合法的接口
 ```
 	check: check(loc, game) { [native code] }
 ```
-�� `loc` ��������λ�����ƶ������Ҳ���̰���������ͻ, �򷵻� `true` , ���򷵻� `false`(���߽�Ϊ JavaScript �ı�����). ����: 
+若 `loc` 中描述的位置在移动场内且不与贪吃蛇身体冲突, 则返回 `true` , 否则返回 `false`(二者皆为 JavaScript 的保留字). 例子: 
 ```
 	console.log(check({
 	    x: -1
@@ -129,14 +129,14 @@ title: �ӿ��ĵ�
 	console.log(check(game.snake[3], game); // false;
 ```
 
-## �Ƽ�ʹ�õĵ����ú���
-�����õĺ�������Ӱ������Ч�ʵ��³�ʱ, ���ύ����ʱɾ����ע�͵��������. 
+## 推荐使用的调试用函数
+调试用的函数可能影响评测效率导致超时, 请提交代码时删除或注释掉此类代码. 
 
-1. ��ӡ����������̨�ĺ���
+1. 打印变量至控制台的函数
 ```
-	console.log({{Ҫ����ı���}});
+	console.log({{要输出的变量}});
 ```
-1. ��ӡ����������̨�ĺ���
+1. 打印数组至控制台的函数
 ```
-	console.table({{Ҫ���������}});
+	console.table({{要输出的数组}});
 ```
