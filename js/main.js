@@ -133,8 +133,8 @@ $(document).ready(function() {
                 snake.loop(data.data);
                 paint();
                 $('#score').html(snake.totScore);
+                loop();
             }
-            loop();
         }
         worker.onerror = function(e){
             console.log(e.message);
@@ -166,6 +166,7 @@ $(document).ready(function() {
     $('#btn-reset').click(function() {
 	$('#ai').val('');
         worker.terminate();
+        running = false;
     });
 
     $('#btn-mode').click(function() {
