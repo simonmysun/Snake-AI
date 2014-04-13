@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: page
 title: 主页
 ---
 贪吃蛇人工智能算法评测平台

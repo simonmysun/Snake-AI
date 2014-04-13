@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: page
 title: 接口文档
 ---
 ## 全局变量
