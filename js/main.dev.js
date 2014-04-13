@@ -122,7 +122,7 @@ $(document).ready(function() {
 
     $('#btn-start').click(function() {
         running = true;
-        think = createThink(w, h);
+        think = createThink(weight, height);
         snake.init('game');
         time = setTimeout(function() {
             snake.kill();
