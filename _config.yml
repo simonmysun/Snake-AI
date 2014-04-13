@@ -1,0 +1,13 @@
+baseurl: /Snake-AI
+
+markdown:         rdiscount
+pygments:         true
+paginate:         4
+
+title:            Snake-AI | 中国海洋大学 “华为杯”第三届程序设计竞赛 - 第二轮
+author:
+    name:         Simon MY Sun
+    email:        simonmysun@gmail.com
+
+indexContent:     true
+favicon:          /favicon.ico
