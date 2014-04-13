@@ -3,7 +3,7 @@ layout: page
 title: 接口文档
 ---
 ## 全局变量
-_全局变量__几乎不__推荐选手使用. _
+<i>全局变量__几乎不__推荐选手使用. </i>
 
 	Infinity: Infinity
 	Array: function Array() { [native code] }
