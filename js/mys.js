@@ -27,10 +27,10 @@ function createThink(w,h) {
     function checkCollision(x, y, s) {
         for(var p in s) {
             if(x === s[p].x && y === s[p].y) {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
     
     function bfs(loc, game) {
