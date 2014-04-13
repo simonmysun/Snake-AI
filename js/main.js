@@ -7,7 +7,6 @@ var codeExample = [
 var worker;
 var time;
 var running;
-var sign;
 
 var snake = new Snake();
 
@@ -74,7 +73,6 @@ function loop() {
                     snake: snake.snake
                     ,food: snake.food
                 };
-                sign = undefined;
                 worker.postMessage({
                     type: 'game state'
                 ,data: deepClone(state)
