@@ -148,7 +148,9 @@ $(document).ready(function() {
             var data = sdata.data;
             if(data.type === 'result') {
                 snake.loop(data.data);
-                refreshDisplay();
+                if(snake.length <= 6) {
+                    refreshDisplay();
+                }
                 paint();
                 loop();
             }
@@ -207,6 +209,8 @@ $(document).ready(function() {
     
     paint();
     setInterval(function() {
-        nanobar.go(snake.tick * 100 / 10000);
+        if(running) {
+            nanobar.go(snake.tick * 100 / 10000);
+        }
     }, 100);
 });
