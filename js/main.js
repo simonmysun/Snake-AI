@@ -148,7 +148,7 @@ $(document).ready(function() {
             var data = sdata.data;
             if(data.type === 'result') {
                 snake.loop(data.data);
-                if(snake.length <= 6) {
+                if(snake.snake.length <= 6) {
                     refreshDisplay();
                 }
                 paint();
