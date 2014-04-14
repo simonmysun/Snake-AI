@@ -96,11 +96,11 @@ function loop() {
             }, delay);
         } else {
             snake.kill();
+            refreshDisplay();
             clearTimeout(time);
             finish(snake);
         }
     }
-    nanobar.go(snake.tick * 100 / 10000);
 }
 
 function paint() {
@@ -178,6 +178,7 @@ $(document).ready(function() {
         time = setTimeout(function() {
             worker.terminate();
             snake.kill();
+            refreshDisplay();
             finish(snake);
             console.log('Time out. ');
             running = false;
@@ -203,4 +204,7 @@ $(document).ready(function() {
     $('#ai').val(Base64.decode(unescape((location).hash).split("\x7F")[0]||""));
     
     paint();
+    setTimeout(function() {
+        nanobar.go(snake.tick * 100 / 10000);
+    }, 1000);
 });
