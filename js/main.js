@@ -71,15 +71,17 @@ function finish(snake) {
 }
 
 function refreshDisplay() {
-    countup.stop();
-    countup = new countUp("score", lastScore, snake.totScore, 0, 5, {
-        useEasing : true
-        ,useGrouping : true
-        ,separator : ','
-        ,decimal : '.'
-    });
-    lastScore = snake.totScore;
-    countup.start();
+    if(lastScore !== snake.totScore) {
+        countup.stop();
+        countup = new countUp("score", lastScore, snake.totScore, 0, 5, {
+            useEasing : true
+            ,useGrouping : true
+            ,separator : ','
+            ,decimal : '.'
+        });
+        lastScore = snake.totScore;
+        countup.start();
+    }
 }
 
 function loop() {
@@ -149,9 +151,7 @@ $(document).ready(function() {
             var data = sdata.data;
             if(data.type === 'result') {
                 snake.loop(data.data);
-                if(snake.score === 0) {
-                    refreshDisplay();
-                }
+                refreshDisplay();
                 paint();
                 loop();
             }
