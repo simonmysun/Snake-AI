@@ -8,7 +8,7 @@ var worker;
 var time;
 var running;
 var countup;
-var lastscore = 0;
+var lastScore = 0;
 
 var nanobar = new Nanobar();
 
@@ -71,7 +71,7 @@ function finish(snake) {
 
 function refreshDisplay() {
     countup.stop();
-    countup = new countUp("score", lastscore, snake.totScore, 0, 2.5, {
+    countup = new countUp("score", lastScore, snake.totScore, 0, 2.5, {
         useEasing : true
         ,useGrouping : true
         ,separator : ','
@@ -166,6 +166,7 @@ $(document).ready(function() {
             ,separator : ','
                     ,decimal : '.'
         });
+        lastScore = 0;
         running = true;
         worker.postMessage({
             type: 'init'
@@ -204,7 +205,7 @@ $(document).ready(function() {
     $('#ai').val(Base64.decode(unescape((location).hash).split("\x7F")[0]||""));
     
     paint();
-    setTimeout(function() {
+    setInterval(function() {
         nanobar.go(snake.tick * 100 / 10000);
-    }, 1000);
+    }, 100);
 });
