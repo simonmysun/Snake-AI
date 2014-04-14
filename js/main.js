@@ -8,6 +8,9 @@ var worker;
 var time;
 var running;
 var countup;
+var lastscore = 0;
+
+var nanobar = new Nanobar();
 
 var snake = new Snake();
 
@@ -66,6 +69,18 @@ function finish(snake) {
     console.log(snake.totScore);
 }
 
+function refreshDisplay() {
+    countup.stop();
+    countup = new countUp("score", lastscore, snake.totScore, 0, 2.5, {
+        useEasing : true
+        ,useGrouping : true
+        ,separator : ','
+        ,decimal : '.'
+    });
+    lastScore = snake.totScore;
+    countup.start();
+}
+
 function loop() {
     if(running) {
         if(snake.tick < 10000) {
@@ -85,6 +100,7 @@ function loop() {
             finish(snake);
         }
     }
+    nanobar.go(snake.tick * 100 / 10000);
 }
 
 function paint() {
@@ -133,15 +149,6 @@ $(document).ready(function() {
             if(data.type === 'result') {
                 snake.loop(data.data);
                 paint();
-                countup.stop();
-                countup = new countUp("score", parseInt($('#score').html()), snake.totScore, 0, 2.5, {
-                    useEasing : true
-                    ,useGrouping : true
-                    ,separator : ','
-                    ,decimal : '.'
-                });
-                countup.start();
-                ;
                 loop();
             }
         }
