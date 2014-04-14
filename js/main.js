@@ -7,6 +7,7 @@ var codeExample = [
 var worker;
 var time;
 var running;
+var countup;
 
 var snake = new Snake();
 
@@ -132,7 +133,15 @@ $(document).ready(function() {
             if(data.type === 'result') {
                 snake.loop(data.data);
                 paint();
-                $('#score').html(snake.totScore);
+                countup.stop();
+                countup = newcountUp("myTargetElement", parseInt($('#score').html()), snake.totScore, 0, 2.5, {
+                    useEasing : true
+                    ,useGrouping : true
+                    ,separator : ','
+                    ,decimal : '.'
+                });
+                countup.start();
+                ;
                 loop();
             }
         }

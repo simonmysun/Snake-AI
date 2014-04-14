@@ -1,6 +1,6 @@
 baseurl: /Snake-AI
 
-markdown:         rdiscount
+markdown:         kramdown
 pygments:         true
 paginate:         4
 
