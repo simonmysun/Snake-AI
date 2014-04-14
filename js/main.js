@@ -149,7 +149,7 @@ $(document).ready(function() {
             var data = sdata.data;
             if(data.type === 'result') {
                 snake.loop(data.data);
-                if(snake.snake.length < 6) {
+                if(snake.score === 0) {
                     refreshDisplay();
                 }
                 paint();
