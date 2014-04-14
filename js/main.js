@@ -6,7 +6,7 @@ var codeExample = [
 
 var worker;
 var time;
-var running;
+var running = false;
 var countup;
 var lastScore = 0;
 
@@ -67,11 +67,12 @@ onkeyup = updateUrl;
 
 function finish(snake) {
     console.log(snake.totScore);
+    running = false;
 }
 
 function refreshDisplay() {
     countup.stop();
-    countup = new countUp("score", lastScore, snake.totScore, 0, 2.5, {
+    countup = new countUp("score", lastScore, snake.totScore, 0, 5, {
         useEasing : true
         ,useGrouping : true
         ,separator : ','

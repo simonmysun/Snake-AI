@@ -12,3 +12,16 @@ onmessage = function(sdata) {
         });
     }
 }
+
+var check = function(loc, game) {
+    var self = game;
+    if(loc.x < 0 || loc.y < 0 || loc.x >= self.w || loc.y >= self.h) {
+        return false;
+    }
+    for(var l in self.snake) {
+        if(loc.x == self.snake[l].x && loc.y == self.snake[l].y) {
+            return false;
+        }
+    }
+    return true;
+}
