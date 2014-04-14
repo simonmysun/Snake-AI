@@ -4,6 +4,8 @@ onmessage = function(sdata) {
         importScripts(data.data);
     } else if(data.type === 'init') {
         think = createThink(data.data.w, data.data.h);
+        w = data.data.w;
+        h = data.data.h;
     } else if(data.type === 'game state') {
         var result = think(data.data);
         postMessage({
@@ -15,7 +17,7 @@ onmessage = function(sdata) {
 
 var check = function(loc, game) {
     var self = game;
-    if(loc.x < 0 || loc.y < 0 || loc.x >= self.w || loc.y >= self.h) {
+    if(loc.x < 0 || loc.y < 0 || loc.x >= w || loc.y >= h) {
         return false;
     }
     for(var l in self.snake) {
