@@ -134,7 +134,7 @@ $(document).ready(function() {
                 snake.loop(data.data);
                 paint();
                 countup.stop();
-                countup = new countUp("myTargetElement", parseInt($('#score').html()), snake.totScore, 0, 2.5, {
+                countup = new countUp("score", parseInt($('#score').html()), snake.totScore, 0, 2.5, {
                     useEasing : true
                     ,useGrouping : true
                     ,separator : ','
@@ -153,7 +153,7 @@ $(document).ready(function() {
     });
     
     $('#btn-start').click(function() {
-        countup = new countUp("myTargetElement", 0, snake.totScore, 0, 2.5, {
+        countup = new countUp("score", 0, snake.totScore, 0, 2.5, {
             useEasing : true
             ,useGrouping : true
             ,separator : ','
