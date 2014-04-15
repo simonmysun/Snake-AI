@@ -27,3 +27,23 @@ var check = function(loc, game) {
     }
     return true;
 }
+
+var deepClone = function(obj) {
+    var buffer;
+    if(obj instanceof Array) {
+        buffer = [];
+        var i = obj.length;
+        while(i--) {
+            buffer[i] = deepClone(obj[i]);
+        }
+        return buffer;
+    } else if (obj instanceof Object) {
+        buffer = {};
+        for(var k in obj) {
+            buffer[k] = deepClone(obj[k]);
+        }
+        return buffer;
+    } else {
+        return obj;
+    }
+}
