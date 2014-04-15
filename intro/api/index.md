@@ -127,7 +127,6 @@ title: 接口文档
 
 	check: check(loc, game) { [native code] }
 
-
 若 `loc` 中描述的位置在移动场内且不与贪吃蛇身体冲突, 则返回 `true` , 否则返回 `false`(二者皆为 JavaScript 的保留字). 例子: 
 
 	console.log(check({
@@ -136,6 +135,11 @@ title: 接口文档
 	}), game); // false;
 	console.log(check(game.snake[3], game); // false;
 
+### 深度复制一个对象的函数
+
+	deepClone: deepClone(obj) { [native code] }
+
+将会返回一个新的属性和值与 `obj` 相同的对象. 
 
 ## 推荐使用的调试用函数
 调试用的函数可能影响评测效率导致超时, 请提交代码时删除或注释掉此类代码. 
