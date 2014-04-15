@@ -117,9 +117,11 @@ function paint() {
     for(var p in snake.snake) {
 	var x = snake.snake[p].x;
 	var y = snake.snake[p].y;
-	ctx.fillStyle = '#FFDC00';
+	ctx.fillStyle = rgba(225, 220, 0, 1 - 0.7 * (i / snake.snake.length));
 	ctx.fillRect(x * cw, y * cw, cw, cw);
-	ctx.strokeStyle = 'white';
+        if(p != 0) {
+	    ctx.strokeStyle = 'white';
+        }
 	ctx.strokeRect(x * cw, y * cw, cw, cw);
     }
     for(var p in snake.food) {
