@@ -92,6 +92,49 @@ title: Sandbox
     <script src="{{ site.baseurl }}/js/nanobar.min.js"></script>
     <script src="{{ site.baseurl }}/js/snake.js"></script>
     <script src="{{ site.baseurl }}/js/main.js"></script>
+
+    <script>
+      function startIntro(){
+        var intro = introJs();
+          intro.setOptions({
+            steps: [
+              { 
+                intro: "Hello, this is Snake-AI, a sand box for testing AI scripts. "
+              },
+              {
+                element: '#ai-scripts',
+                intro: "Just input your scripts here, ",
+              },
+              {
+                element: '#btn-load',
+                intro: "and click here to load your scripts, ",
+              },
+              {
+                element: '#btn-start',
+                intro: "and click here to start! "
+              },
+              {
+                element: '#score',
+                intro: "Your score of this game will be shown here. "
+              },
+              {
+                intro: "There will be progress bar showing how much your snake has walked. "
+              },
+              {
+                element: '#btn-reset',
+                intro: "If you want to stop your scripts, click here. "
+              },
+              {
+                intro: 'So let the snake run! '
+              }
+            ]
+          });
+
+          intro.start();
+      }
+      startIntro();
+    </script>
+
+    <script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=" charset="utf-8"></script>
     <script src="https://apis.google.com/js/client.js?onload=load"></script>
     <script src="{{ site.baseurl }}/js/shorturl.js"></script>
-    <script type="text/javascript" src="http://v3.jiathis.com/code_mini/jia.js?uid=" charset="utf-8"></script>
