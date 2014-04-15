@@ -200,7 +200,7 @@ $(document).ready(function() {
     });
 
     $('#btn-mode').click(function() {
-	delay ^= 60;
+	delay ^= 120;
     });
 
     $('#ai-examples').change(function() {
