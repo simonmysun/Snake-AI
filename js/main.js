@@ -1,4 +1,4 @@
-var delay = 120;
+var delay = 90;
 var keyboardDirection = '';
 var codeExample = [
     ''
@@ -68,6 +68,10 @@ onkeyup = updateUrl;
 function finish(snake) {
     console.log(snake.totScore);
     running = false;
+    worker.terminate();
+    snake.kill();
+    refreshDisplay();
+    clearTimeout(time);
 }
 
 function refreshDisplay() {
@@ -98,9 +102,6 @@ function loop() {
                 });
             }, delay);
         } else {
-            snake.kill();
-            refreshDisplay();
-            clearTimeout(time);
             finish(snake);
         }
     }
@@ -181,24 +182,19 @@ $(document).ready(function() {
         });
         snake.init('game');
         time = setTimeout(function() {
-            worker.terminate();
-            snake.kill();
-            refreshDisplay();
             finish(snake);
             console.log('Time out. ');
-            running = false;
         }, 300 * 1000);
         loop();
     });
     
     $('#btn-reset').click(function() {
 	$('#ai').val('');
-        worker.terminate();
-        running = false;
+        finish();
     });
 
     $('#btn-mode').click(function() {
-	delay ^= 120;
+	delay ^= 90;
     });
 
     $('#ai-examples').change(function() {
