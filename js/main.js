@@ -1,4 +1,4 @@
-var delay = 60;
+var delay = 120;
 var keyboardDirection = '';
 var codeExample = [
     ''
