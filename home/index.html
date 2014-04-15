@@ -6,11 +6,11 @@ date: Index
 
 <div class="container">
 <hr>
-¡¡¡¡<h2>Official Blog</h2>
-¡¡¡¡<p>The latest news about it</p>
-¡¡¡¡<ul>
-¡¡¡¡¡¡¡¡{% for post in site.posts %}
-¡¡¡¡¡¡¡¡¡¡¡¡<li>{{ post.date | date_to_string }} <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
-¡¡¡¡¡¡¡¡{% endfor %}
-¡¡¡¡</ul>
+ã€€ã€€<h2>Official Blog</h2>
+ã€€ã€€<p>The latest news about it</p>
+ã€€ã€€<ul>
+ã€€ã€€ã€€ã€€{% for post in site.posts %}
+ã€€ã€€ã€€ã€€ã€€ã€€<li>{{ post.date | date_to_string }} <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
+ã€€ã€€ã€€ã€€{% endfor %}
+ã€€ã€€</ul>
 </div>
