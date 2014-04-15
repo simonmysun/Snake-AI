@@ -5,9 +5,8 @@ date: Index
 ---
 
 <div class="container">
-<hr>
 　　<h2>Official Blog</h2>
-　　<p>The latest news about it</p>
+　　<p>The latest news about us</p>
 　　<ul>
 　　　　{% for post in site.posts %}
 　　　　　　<li>{{ post.date | date_to_string }} <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
