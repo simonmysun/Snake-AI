@@ -117,7 +117,7 @@ function paint() {
     for(var p in snake.snake) {
 	var x = snake.snake[p].x;
 	var y = snake.snake[p].y;
-        ctx.fillStyle = "rgba(225, 220, 0, " + (1 - 0.7 * (i / snake.snake.length)).toString() + ")";
+        ctx.fillStyle = "rgba(225, 220, 0, " + (1 - 0.7 * (p / snake.snake.length)).toString() + ")";
 	ctx.fillRect(x * cw, y * cw, cw, cw);
         if(p != 0) {
 	    ctx.strokeStyle = 'white';
