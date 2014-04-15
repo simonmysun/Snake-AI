@@ -73,7 +73,7 @@ function finish(snake) {
 function refreshDisplay() {
     if(lastScore !== snake.totScore) {
         countup.stop();
-        countup = new countUp("score", lastScore, snake.totScore, 0, 5, {
+        countup = new countUp("score", lastScore, snake.totScore, 0, 2.5, {
             useEasing : true
             ,useGrouping : true
             ,separator : ','
