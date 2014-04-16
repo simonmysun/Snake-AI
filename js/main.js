@@ -72,6 +72,7 @@ function finish(snake) {
     snake.kill();
     refreshDisplay();
     clearTimeout(time);
+    snake.init();
 }
 
 function refreshDisplay() {
