@@ -20,7 +20,9 @@ title: 主页
 ## 参赛入门
 
 本评测平台接收 JavaScript 代码, 点击[此处](http://bonsaiden.github.io/JavaScript-Garden/zh/)学习 JavaScript. 
+
 ### 选手应该提供什么? 
+
 选手应提供一个闭包函数. 该函数将在游戏开始时被载入并运行. 函数应以运动场的大小信息 `w` 和 `h` 为参数, 函数名应为 `createThink`, 并返回每次移动前调用的思考函数. 返回的函数应以游戏状态为参数, 将在每次移动前调用. 
 
 	function createThink(w, h) {
