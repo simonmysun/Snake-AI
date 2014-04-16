@@ -207,8 +207,6 @@ $(document).ready(function() {
     
     paint();
     setInterval(function() {
-        if(running) {
-            nanobar.go(snake.tick * 100 / 10000);
-        }
-    }, 100);
+        nanobar.go(snake.tick * 100 / 10000);
+    }, 300);
 });
