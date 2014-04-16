@@ -72,7 +72,7 @@ function finish(snake) {
     snake.kill();
     refreshDisplay();
     clearTimeout(time);
-    snake.init();
+    snake.init('game');
 }
 
 function refreshDisplay() {
