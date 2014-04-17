@@ -45,7 +45,11 @@ Snake.prototype.createFood = function() {
         x: -1
         ,y: -1
     };
-    while(self.check(food) == false && self.w * self.h > self.snake.length) {
+    if(self.w * self.h == self.snake.length) {
+        self.kill();
+        return;
+    }
+    while(self.check(food) == false) {
         food = {
 	    x: Math.round(Math.random() * (self.w - 1))
 	    ,y: Math.round(Math.random() * (self.h - 1))
