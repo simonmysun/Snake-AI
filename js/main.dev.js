@@ -13,7 +13,7 @@ var snake = new Snake();
 
 function showShare() {
     getUrl(window.location.href, function(res) {
-        $('#share-qr').attr('src',res + '.qr');
+        $('#share-qr').attr('src', res + '.qr');
         var msgEn = "My AI script scored " + snake.totScore + " on snake game. Someone challenging me? -> " + res;
         $('#share-en').text(msgEn);
         var msgCn = '#贪吃蛇AI#我的贪吃蛇 AI 脚本刚刚得了 ' + snake.totScore + ' 分, 有人来围观/挑战我的代码么?  -> ' + res;

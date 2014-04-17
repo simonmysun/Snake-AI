@@ -32,10 +32,10 @@ Snake.prototype.createSnake = function() {
     var length = 5;
     self.snake = [];
     for(var i = length - 1; i >= 0 ; i -- ) {
-	self.snake.push({
-	    x: i
-	    ,y: 0
-	});
+        self.snake.push({
+            x: i
+            ,y: 0
+        });
     }
 }
 
@@ -51,8 +51,8 @@ Snake.prototype.createFood = function() {
     }
     while(self.check(food) == false) {
         food = {
-	    x: Math.round(Math.random() * (self.w - 1))
-	    ,y: Math.round(Math.random() * (self.h - 1))
+            x: Math.round(Math.random() * (self.w - 1))
+            ,y: Math.round(Math.random() * (self.h - 1))
         };
     }
     self.food.push(food);
