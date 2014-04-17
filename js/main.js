@@ -66,12 +66,29 @@ function updateUrl() {
 onkeyup = updateUrl;
 
 function finish(snake) {
-    console.log(snake.totScore);
     running = false;
     worker.terminate();
     snake.kill();
     refreshDisplay();
     clearTimeout(time);
+    _gaq.push([
+        '_trackEvent',
+        'result',
+        'score',
+        'finished',
+        snake.totScore.toString,
+        true
+    ]);
+    if(snake.totScore > 50000) {
+        _gaq.push([
+            '_trackEvent',
+            'code',
+            'score',
+            'highscore',
+            Base64.encode($('#ai').val(),
+            true
+        ]);
+    }
     snake.init('game');
 }
 
@@ -99,7 +116,7 @@ function loop() {
                 };
                 worker.postMessage({
                     type: 'game state'
-                ,data: deepClone(state)
+                    ,data: deepClone(state)
                 });
             }, delay);
         } else {
@@ -166,6 +183,7 @@ $(document).ready(function() {
     });
     
     $('#btn-start').click(function() {
+        finish(snake);
         countup = new countUp("score", 0, snake.totScore, 0, 2.5, {
             useEasing : true
             ,useGrouping : true
@@ -209,4 +227,15 @@ $(document).ready(function() {
     setInterval(function() {
         nanobar.go(snake.tick * 100 / 10000);
     }, 300);
+/*
+    window.addEventListener('error', function(e) {
+        _gaq.push([
+            '_trackEvent',
+            'JavaScript Error',
+            e.message,
+            e.filename + ':  ' + e.lineno,
+            true
+        ]);
+    });
+*/
 });

@@ -46,6 +46,7 @@ Snake.prototype.createFood = function() {
         ,y: -1
     };
     if(self.w * self.h == self.snake.length) {
+        self,.score *= 2;
         self.kill();
         return;
     }
