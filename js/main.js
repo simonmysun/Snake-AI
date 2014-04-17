@@ -69,7 +69,6 @@ onkeyup = updateUrl;
 
 function finish(snake) {
     running = false;
-    worker.terminate();
     snake.kill();
     refreshDisplay();
     clearTimeout(time);
@@ -123,6 +122,7 @@ function loop() {
             }, delay);
         } else {
             finish(snake);
+            worker.terminate();
         }
     }
 }
@@ -204,6 +204,7 @@ $(document).ready(function() {
         snake.init('game');
         time = setTimeout(function() {
             finish(snake);
+            worker.terminate();
             console.log('Time out. ');
         }, 300 * 1000);
         loop();
@@ -212,6 +213,7 @@ $(document).ready(function() {
     $('#btn-reset').click(function() {
         $('#ai').val('');
         finish(snake);
+        worker.terminate();
     });
 
     $('#btn-mode').click(function() {
