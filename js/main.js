@@ -85,7 +85,7 @@ function finish(snake) {
             'code',
             'score',
             'highscore',
-            Base64.encode($('#ai').val(),
+            Base64.encode($('#ai').val()),
             true
         ]);
     }
