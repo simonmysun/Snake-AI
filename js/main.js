@@ -10,6 +10,8 @@ var running = false;
 var countup;
 var lastScore = 0;
 
+var _gaq = _gaq || [];
+
 var nanobar = new Nanobar();
 
 var snake = new Snake();
