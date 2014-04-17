@@ -80,10 +80,10 @@ Snake.prototype.loop = function(direction) {
         next.x += 1;
     }
     self.tick ++ ;
+    var tail = self.snake.pop();
     if(self.check(next) == false) {
         self.kill();
     } else {
-        var tail = self.snake.pop();
         self.snake.unshift(next);
         if(next.x == self.food[0].x && next.y == self.food[0].y) {
             self.score += 1;
