@@ -72,24 +72,14 @@ function finish(snake) {
     snake.kill();
     refreshDisplay();
     clearTimeout(time);
-    _gaq.push([
-        '_trackEvent',
-        'result',
-        'score',
-        'finished',
-        snake.totScore.toString,
-        true
-    ]);
-    if(snake.totScore > 50000) {
-        _gaq.push([
-            '_trackEvent',
-            'code',
-            'score',
-            'highscore',
-            Base64.encode($('#ai').val()),
-            true
-        ]);
-    }
+    var totScore = snake.totScore;
+    var cb = function(res) {
+        ga('send', 'event', 'score', 'all', totScore.toString());
+        if(snake.totScore > 50000) {
+            ga('send', 'event', 'code', 'high score', Base64.encode(res));
+        }
+    };
+    getUrl(window.location.href, cb);
     snake.init('game');
 }
 
