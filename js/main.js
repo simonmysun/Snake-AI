@@ -161,6 +161,7 @@ $(document).ready(function() {
     worker = new Worker('./../js/worker.js');
     
     $('#btn-load').click(function() {
+        finish(snake);
         var src = 'data:text/javascript;base64,' + Base64.encode($('#ai').val());
         worker.terminate();
         worker = new Worker('./../js/worker.js');
