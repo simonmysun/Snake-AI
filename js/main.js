@@ -75,7 +75,7 @@ function finish(snake) {
     var totScore = snake.totScore;
     var cb = function(res) {
         ga('send', 'event', 'score', 'all', totScore.toString());
-        if(snake.totScore > 50000) {
+        if(totScore > 50000) {
             ga('send', 'event', 'code', 'high score', Base64.encode(res));
         }
     };
