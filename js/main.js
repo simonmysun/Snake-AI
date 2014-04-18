@@ -222,15 +222,4 @@ $(document).ready(function() {
     setInterval(function() {
         nanobar.go(snake.tick * 100 / 10000);
     }, 300);
-/*
-    window.addEventListener('error', function(e) {
-        _gaq.push([
-            '_trackEvent',
-            'JavaScript Error',
-            e.message,
-            e.filename + ':  ' + e.lineno,
-            true
-        ]);
-    });
-*/
 });
