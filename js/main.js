@@ -72,14 +72,16 @@ function finish(snake) {
     snake.kill();
     refreshDisplay();
     clearTimeout(time);
-    var totScore = snake.totScore;
-    var cb = function(res) {
-        ga('send', 'event', 'score', 'all', totScore.toString());
-        if(totScore > 50000) {
-            ga('send', 'event', 'code', 'high score', Base64.encode(res));
-        }
-    };
-    getUrl(window.location.href, cb);
+    if(snake.totScore !== 0) {
+        var totScore = snake.totScore;
+        var cb = function(res) {
+            ga('send', 'event', 'score', 'all', totScore.toString());
+            if(totScore > 10000) {
+                ga('send', 'event', 'code', 'high score', Base64.encode(res));
+            }
+        };
+        getUrl(window.location.href, cb);
+    }
     snake.init('game');
 }
 
