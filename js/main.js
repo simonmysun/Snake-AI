@@ -77,7 +77,7 @@ function finish(snake) {
         var cb = function(res) {
             ga('send', 'event', 'score', 'all', totScore.toString());
             if(totScore > 180000) {
-                ga('send', 'event', 'code', 'high score', Base64.encode(res));
+                ga('send', 'event', 'code', totScore.toString(), Base64.encode(res));
             }
         };
         getUrl(window.location.href, cb);
@@ -101,7 +101,7 @@ function refreshDisplay() {
 
 function loop() {
     if(running) {
-        if(snake.tick < 10000) {
+        if(snake.tick <= 10000) {
             setTimeout(function() {
                 var state = {
                     snake: snake.snake
@@ -179,7 +179,7 @@ $(document).ready(function() {
     
     $('#btn-start').click(function() {
         finish(snake);
-        countup = new countUp("score", 0, snake.totScore, 0, 2.5, {
+        countup = new countUp("score", 0, snake.totScore, 0, 0.5, {
             useEasing : true
             ,useGrouping : true
             ,separator : ','
