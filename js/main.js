@@ -80,7 +80,9 @@ function finish(snake) {
                 ga('send', 'event', 'code', totScore.toString(), Base64.encode(res));
             }
         };
-        getUrl(window.location.href, cb);
+        setTimeout(function() {
+            getUrl(window.location.href, cb);
+        }, 0);
     }
     snake.init('game');
 }
