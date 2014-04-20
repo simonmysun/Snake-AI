@@ -1,4 +1,4 @@
----
+1---
 layout: page
 title: 主页
 ---
@@ -105,11 +105,13 @@ title: 主页
 
 ### 调试
 
-由于我们的评测平台在线版本使用 web worker 机制防止选手作弊, 所以调试时需要在 Chrome 中打开 worker 调试面板, [这里](http://www.nczonline.net/blog/2009/08/25/web-workers-errors-and-debugging/)和[这里](http://blog.csdn.net/donghao526/article/details/9664701)讲述了 web worker 中代码的调试方法.
+由于我们的评测平台在线版本使用 web worker 机制防止选手作弊, 所以调试时需要在 Chrome 中打开 worker 调试面板, [这里](http://www.nczonline.net/blog/2009/08/25/web-workers-errors-and-debugging/)和[这里](http://blog.csdn.net/donghao526/article/details/9664701)讲述了 web worker 中代码的调试方法. 
 
-(不推荐)我们也有[本地调试版本(点击下载)]({{ site.baseurl }}/dev.zip)可供大家进行调试, 调试时打开 Chrome 开发者工具, 装载代码完毕后, 在 `Sources` 标签中的右侧点击 `Workers` 即可调试自己的脚本. 点击此处下载调试版本程序. 
+调试时打开 Chrome 开发者工具, 装载代码(点击 `Load` )完毕后, 在 `Sources` 标签中的右侧点击 `Workers` 打开 Web Worker 调试窗口, 这里的 `Source` 标签中, `(no domain)` 下的代码即为调试选手提交的脚本. 
 
-评测环境与调试环境几乎相同, 但有一些变量被占用, 为防止运行结果出现偏差请提交代码前在[在线沙箱]({{ site.baseurl }}/game/)中运行. 
+_注意: 每次装载都会产生新的 Web Worker 线程, 需要重新打开 Web Worker 调试窗口. _
+
+(不推荐)我们也有[本地调试版本(点击下载)]({{ site.baseurl }}/dev.zip)可供大家进行调试. 评测环境与调试环境几乎相同, 但有一些变量被占用, 为防止运行结果出现偏差请务必在提交代码前在[在线沙箱]({{ site.baseurl }}/game/)中运行. 
 
 ## FAQ
 
@@ -119,12 +121,22 @@ title: 主页
 1. 如何提交代码
 > 发送邮件至主办方. 
 
+1. 我可以复制 / 修改 Snake-AI 的代码并自己运行吗? 
+> 可以. 
+
 ## 关于
 
 作者: Simonmysun
 
 <!--鸣谢: Friends-->
 
-## Licience
+## Copyright & Licience
+
+### Code of the platform
 
 MIT
+
+### Code of participant
+Code of participant are all data that can be downloaded from the website. 
+
+You may use the code to play the original Snake-AI as served from this website, and you may cache or copy it locally. However, you may not modify or redistribute the code for any purpose unless you have a separate license from the owner(s) to do so. To enable local testing and experimenting, you may use the code with versions of Snake-AI that you yourself have modified, but not if the modifications were made by someone else.
