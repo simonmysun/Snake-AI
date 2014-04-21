@@ -130,13 +130,17 @@ _注意: 每次装载都会产生新的 Web Worker 线程, 需要重新打开 We
 
 <!--鸣谢: Friends-->
 
-## Copyright & Licience
+## 版权和开放许可 - Copyright & Licience
 
-### Code of the platform
+### 平台代码 - Code of the platform
 
 MIT
 
-### Code of participant
+### 使用者提交的代码 - Code of participant
+使用者提交的内容指从本网站可以下载的所有数据. 
+
 Code of participant are all data that can be downloaded from the website. 
+
+你可以用这些代码在本网站上运行, 也可以缓存或在本地储存. 但除非原作者(们)许可, 你不能出于任何目的修改或重新发布这些代码. 为了本地测试和实验, 你可以使用你自己修改的而非其他人修改的任何版本的 Snake-AI. 
 
 You may use the code to play the original Snake-AI as served from this website, and you may cache or copy it locally. However, you may not modify or redistribute the code for any purpose unless you have a separate license from the owner(s) to do so. To enable local testing and experimenting, you may use the code with versions of Snake-AI that you yourself have modified, but not if the modifications were made by someone else.
