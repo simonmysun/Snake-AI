@@ -14,14 +14,3 @@ title: 选手提交代码说明
 * 选手提交的代码版权归选手所有. 
 
 比赛进入最后一个周, 选手注意保护自己的代码不要被其他选手抄袭, 包括不要发送代码给他人或在我们的平台之外的地方提交代码等. 
-
-## Copyright & Licience
-
-### Code of the platform
-
-MIT
-
-### Code of participant
-Code of participant are all data that can be downloaded from the website. 
-
-You may use the code to play the original Snake-AI as served from this website, and you may cache or copy it locally. However, you may not modify or redistribute the code for any purpose unless you have a separate license from the owner(s) to do so. To enable local testing and experimenting, you may use the code with versions of Snake-AI that you yourself have modified, but not if the modifications were made by someone else.
