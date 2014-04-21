@@ -1,4 +1,4 @@
-1---
+---
 layout: page
 title: 主页
 ---
