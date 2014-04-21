@@ -130,7 +130,7 @@ _注意: 每次装载都会产生新的 Web Worker 线程, 需要重新打开 We
 
 <!--鸣谢: Friends-->
 
-## 版权和开放许可 - Copyright & Licience
+## 版权和开放许可 - Copyright & Licence
 
 ### 平台代码 - Code of the platform
 
