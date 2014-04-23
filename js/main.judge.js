@@ -192,7 +192,7 @@ $(document).ready(function() {
 
     setInterval(function() {
         nanobar.go(snake.tick * 100 / 10000);
-        $('#result-log').text(__log);
+        $('#result-log').html(__log);
     }, 300);
 
     startTest();
@@ -224,5 +224,5 @@ window.onerror = function (errorMsg, url, lineNumber, column, errorObj) {
 }
 
 function _log(s) {
-    __log = __log.concat('    ' + s);
+    __log = __log.concat('&nbsp;&nbsp;&nbsp;&nbsp;' + s);
 }
