@@ -215,8 +215,8 @@ function startTest() {
     runGame();
 }
 
-window.onerror = function (errorMsg, url, lineNumber) {
-    _log(('Error: ' + errorMsg + ' Script: ' + url + ' Line: ' + lineNumber);
+window.onerror = function (errorMsg, url, lineNumber, column, errorObj) {
+    _log('Error: ' + errorMsg + ' Script: ' + url + ' Line: ' + lineNumber + ' Column: ' + column + ' StackTrace: ' +  errorObj);
 }
 
 function _log(s) {
