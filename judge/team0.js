@@ -1,6 +1,6 @@
 function createThink(w, h) {
     var obj;
-    int x = 0;
+    var x = 0;
     while(x < INF) {
         obj[x] = deepClone(obj);
     }
