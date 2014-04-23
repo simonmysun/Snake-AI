@@ -192,7 +192,7 @@ $(document).ready(function() {
 
     setInterval(function() {
         nanobar.go(snake.tick * 100 / 10000);
-        $('#result-log').html(__log);
+        $('#result-log').text(__log);
     }, 300);
 
     startTest();
