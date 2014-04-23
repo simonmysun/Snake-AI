@@ -56,7 +56,7 @@ function finishGame(snake) {
     snake.kill();
     refreshDisplay();
     clearTimeout(time);
-    console.log(snake.totScore);
+    _log(snake.totScore);
     snake.init('game');
     nextTest();
 }
