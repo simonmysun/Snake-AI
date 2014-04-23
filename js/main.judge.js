@@ -203,7 +203,7 @@ function startTest() {
         var cb = function(result) {
             loadGame(result);
             startGame();
-            _log('\n' + sourceList[index] + ':');
+            _log('<br>' + sourceList[index] + ':');
             index ++ ;
             nextTest = runGame;
         };
