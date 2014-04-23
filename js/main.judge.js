@@ -17,6 +17,8 @@ var running = false;
 var countup;
 var lastScore = 0;
 
+var __log = '';
+
 var nanobar = new Nanobar();
 
 var snake = new Snake();
@@ -165,7 +167,7 @@ function startGame() {
     time = setTimeout(function() {
         finishGame(snake);
         worker.terminate();
-        console.log('Time out. ');
+        _log('Time out. ');
     }, 30 * 1000);
     loop();
 }
@@ -190,6 +192,7 @@ $(document).ready(function() {
 
     setInterval(function() {
         nanobar.go(snake.tick * 100 / 10000);
+        $('#result-log').html(__log);
     }, 300);
 });
 
@@ -200,6 +203,7 @@ function startTest() {
         var cb = function(result) {
             loadGame(result);
             startGame();
+            _log('\n' + sourceList[index] + ':');
             index ++ ;
             nextTest = runGame;
         };
@@ -209,4 +213,12 @@ function startTest() {
         $.get(sourceList[index], cb, 'text');
     }
     runGame();
+}
+
+window.onerror = function (errorMsg, url, lineNumber) {
+    _log(('Error: ' + errorMsg + ' Script: ' + url + ' Line: ' + lineNumber);
+}
+
+function _log(s) {
+    __log = __log.concat(' ' + s);
 }
