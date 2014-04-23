@@ -1,5 +1,5 @@
 function createThink(w, h) {
-    var obj;
+    var obj = [];
     var x = 0;
     while(x < Infinity) {
         obj[x] = deepClone(obj);
