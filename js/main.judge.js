@@ -44,8 +44,8 @@ function finish(snake) {
     snake.kill();
     refreshDisplay();
     clearTimeout(time);
-    snake.init('game');
     console.log(snake.totScore);
+    snake.init('game');
 }
 
 function refreshDisplay() {
@@ -155,7 +155,7 @@ function startGame() {
         finish(snake);
         worker.terminate();
         console.log('Time out. ');
-    }, 300 * 1000);
+    }, 30 * 1000);
     loop();
 }
 
@@ -191,7 +191,7 @@ function startTest() {
             loadGame(result);
             startGame();
             index ++ ;
-            setTimeout(runGame, 6 * 60 * 1000);
+            setTimeout(runGame, 1 * 60 * 1000);
         };
         if(sourceList[index] === undefined) {
             return;
