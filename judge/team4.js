@@ -1,10 +1,9 @@
 function createThink(w, h) {
-    var obj;
-    int x;
-    while(x < INF) {
-        obj[x] = deepClone(obj);
+    var x = 0;
+    while(1) {
+        x ++ ;
     }
-    return function(game) {
-        return 'right';
+    return function(x) {
+        console.log('yy');
     }
 }
