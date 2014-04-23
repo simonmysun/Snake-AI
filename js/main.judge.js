@@ -140,9 +140,9 @@ function loadGame(code) {
         }
     }
     worker.onerror = function(e){
-        console.log(e.message);
-        console.log(e.lineno);
-        console.log(e.filename);
+        //console.log(e.message);
+        //console.log(e.lineno);
+        //console.log(e.filename);
     };
 }
 
