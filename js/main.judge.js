@@ -9,7 +9,7 @@ var sourceList = [
 
 var nextTest = function() {};
 
-var delay = 90;
+var delay = 0;
 
 var worker;
 var time;
@@ -194,6 +194,8 @@ $(document).ready(function() {
         nanobar.go(snake.tick * 100 / 10000);
         $('#result-log').html(__log);
     }, 300);
+
+    startTest();
 });
 
 
@@ -208,6 +210,8 @@ function startTest() {
             nextTest = runGame;
         };
         if(sourceList[index] === undefined) {
+            _log('<br>Done. ');
+            window.open("/fest/springfestival/");
             return;
         }
         $.get(sourceList[index], cb, 'text');
@@ -220,5 +224,5 @@ window.onerror = function (errorMsg, url, lineNumber, column, errorObj) {
 }
 
 function _log(s) {
-    __log = __log.concat(' ' + s);
+    __log = __log.concat('    ' + s);
 }
