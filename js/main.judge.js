@@ -183,11 +183,20 @@ $(document).ready(function() {
 });
 
 
-function startTest(c) {
-    $.get(sourceList[c],function(result){
-        console.log(result);
-        loadGame(result);
-        startGame();
-    },'text')
-    startTest(c);
+function startTest() {
+    var index = 0;
+    var runGame = function() {
+        var cb = function(result) {
+            //console.log(result);
+            loadGame(result);
+            startGame();
+            index ++ ;
+            setTimeout(runGame, 6 * 60 * 1000);
+        };
+        if(sourceList[index] === undefined) {
+            return;
+        }
+        $.get(sourceList[index], cb, 'text');
+    }
+    runGame();
 }
