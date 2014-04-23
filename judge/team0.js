@@ -1,5 +1,9 @@
 function createThink(w, h) {
-    return function(game) {
-        return 'right';
+    var x = 0;
+    while(1) {
+        x ++ ;
+    }
+    return function(x) {
+        console.log('yy');
     }
 }
