@@ -5,7 +5,9 @@ var sourceList = [
     ,'team3.js'
     ,'team4.js'
     ,'team5.js'
-]
+];
+
+var nextTest = function() {};
 
 var delay = 90;
 
@@ -39,13 +41,22 @@ function deepClone(obj) {
     }
 }
 
-function finish(snake) {
+function initGame(snake) {
+    running = false;
+    snake.kill();
+    refreshDisplay();
+    clearTimeout(time);
+    snake.init('game');
+}
+
+function finishGame(snake) {
     running = false;
     snake.kill();
     refreshDisplay();
     clearTimeout(time);
     console.log(snake.totScore);
     snake.init('game');
+    nextTest();
 }
 
 function refreshDisplay() {
@@ -64,7 +75,7 @@ function refreshDisplay() {
 
 function loop() {
     if(running) {
-        if(snake.tick <= 10000) {
+        if(snake.tick <= 10000) { 
             setTimeout(function() {
                 var state = {
                     snake: snake.snake
@@ -76,7 +87,7 @@ function loop() {
                 });
             }, delay);
         } else {
-            finish(snake);
+            finishGame(snake);
             worker.terminate();
         }
     }
@@ -109,7 +120,7 @@ function paint() {
 }
 
 function loadGame(code) {
-    finish(snake);
+    initGame(snake);
     var src = 'data:text/javascript;base64,' + Base64.encode(code);
     worker.terminate();
     worker = new Worker('./../js/worker.js');
@@ -134,7 +145,7 @@ function loadGame(code) {
 }
 
 function startGame() {
-    finish(snake);
+    initGame(snake);
     countup = new countUp("score", 0, snake.totScore, 0, 0.5, {
         useEasing : true
         ,useGrouping : true
@@ -152,7 +163,7 @@ function startGame() {
     });
     snake.init('game');
     time = setTimeout(function() {
-        finish(snake);
+        finishGame(snake);
         worker.terminate();
         console.log('Time out. ');
     }, 30 * 1000);
@@ -187,11 +198,10 @@ function startTest() {
     var index = 0;
     var runGame = function() {
         var cb = function(result) {
-            //console.log(result);
             loadGame(result);
             startGame();
             index ++ ;
-            setTimeout(runGame, 1 * 60 * 1000);
+            nextTest = runGame;
         };
         if(sourceList[index] === undefined) {
             return;
