@@ -18,6 +18,8 @@ var running = false;
 var countup;
 var lastScore = 0;
 
+var totTime = 10 * 1000; 
+
 var __log = '';
 
 var nanobar = new Nanobar();
@@ -169,7 +171,7 @@ function startGame() {
         finishGame(snake);
         worker.terminate();
         _log('Time out. ');
-    }, 30 * 1000);
+    }, totTime);
     loop();
 }
 
