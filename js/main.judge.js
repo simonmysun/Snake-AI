@@ -1,4 +1,4 @@
-var sourceList = [
+var defaultSourceList = [
     'team0.js'
     ,'team1.js'
     ,'team2.js'
@@ -6,6 +6,7 @@ var sourceList = [
     ,'team4.js'
     ,'team5.js'
 ];
+var sourceList = [];
 
 var nextTest = function() {};
 
@@ -194,12 +195,11 @@ $(document).ready(function() {
         nanobar.go(snake.tick * 100 / 10000);
         $('#result-log').html(__log);
     }, 300);
-
-    startTest();
 });
 
 
-function startTest() {
+function startTest(sl) {
+    sourceList = sl;
     var index = 0;
     var runGame = function() {
         var cb = function(result) {
