@@ -6,6 +6,37 @@ var defaultSourceList = [
     ,'test4.js'
     ,'test5.js'
 ];
+
+var srcA = [
+    'a2.js'
+    ,'a4.js'
+    ,'a8.js'
+    ,'a11.js'
+    ,'a14.js'
+    ,'a15.js'
+    ,'a17.js'
+    ,'a24.js'
+    ,'a26.js'
+    ,'a28.js'
+    ,'a34.js'
+];
+
+var srcB = [
+    'b3.js'
+    ,'b6.js'
+    ,'b7.js'
+    ,'b8.js'
+    ,'b11.js'
+    ,'b12.js'
+    ,'b14.js'
+    ,'b16.js'
+    ,'b17.js'
+    ,'b18.js'
+    ,'b21.js'
+    ,'b29.js'
+    ,'b32.js'
+];
+
 var sourceList = [];
 
 var nextTest = function() {};
@@ -18,7 +49,7 @@ var running = false;
 var countup;
 var lastScore = 0;
 
-var totTime = 10 * 1000; 
+var totTime = 420 * 1000; 
 
 var __log = '';
 
