@@ -1,10 +1,10 @@
 var defaultSourceList = [
-    'team0.js'
-    ,'team1.js'
-    ,'team2.js'
-    ,'team3.js'
-    ,'team4.js'
-    ,'team5.js'
+    'test0.js'
+    ,'test1.js'
+    ,'test2.js'
+    ,'test3.js'
+    ,'test4.js'
+    ,'test5.js'
 ];
 var sourceList = [];
 
