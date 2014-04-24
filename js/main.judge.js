@@ -140,11 +140,11 @@ function loadGame(code) {
             loop();
         }
     }
-    worker.onerror = function(e){
+    //worker.onerror = function(e){
         //console.log(e.message);
         //console.log(e.lineno);
         //console.log(e.filename);
-    };
+    //};
 }
 
 function startGame() {
@@ -188,9 +188,6 @@ $(document).ready(function() {
         delay ^= 90;
     });
     paint();
-
-    $('#btn-test').click(startTest);
-
     setInterval(function() {
         nanobar.go(snake.tick * 100 / 10000);
         $('#result-log').html(__log);
@@ -220,7 +217,7 @@ function startTest(sl) {
 }
 
 window.onerror = function (errorMsg, url, lineNumber, column, errorObj) {
-    _log('Error: ' + errorMsg + ' Script: ' + url + ' Line: ' + lineNumber + ' Column: ' + column + ' StackTrace: ' +  errorObj);
+    _log(' Error: ' + errorMsg + ' Script: ' + url + ' Line: ' + lineNumber + ' Column: ' + column + ' StackTrace: ' +  errorObj);
 }
 
 function _log(s) {
