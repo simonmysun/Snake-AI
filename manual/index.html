@@ -1,0 +1,40 @@
+---
+layout: default
+title: Judge
+---
+
+    <div class="container">
+      <div class="row">
+	<div class="col-xs-12 col-sm-7 col-md-6 col-lg-5">
+	  <div id="playground-box">
+	    <canvas id="playground" width="320" height="240"></canvas>
+	  </div>
+	</div>
+	<div class="col-xs-12 col-sm-5 col-md-6 col-lg-7">
+	  <div id="ai-box">
+            <div id="ai-script">
+              <div style="display:block; width: 100%; text-align: center;">
+                Score: <div id="score"></div>.
+              </div>
+            </div>
+	    <div class="form-inline" id="operator" style="text-align: right;">
+	      <a class="btn btn-default" id="btn-mode">
+                Toggle mode
+              </a>
+	    </div>
+	  </div>
+	</div>
+      </div>
+    </div>
+    <div class="container" id="result-log">
+      <div id="results">
+      </div>
+    </div>
+
+    <script src="{{ site.baseurl }}/js/jquery-2.0.3.min.js"></script>
+    <script src="{{ site.baseurl }}/js/bootstrap.min.js"></script>
+    <script src="{{ site.baseurl }}/js/base64.js"></script>
+    <script src="{{ site.baseurl }}/js/countUp.min.js"></script>
+    <script src="{{ site.baseurl }}/js/nanobar.min.js"></script>
+    <script src="{{ site.baseurl }}/js/snake.js"></script>
+    <script src="{{ site.baseurl }}/js/main.manual.js"></script>
