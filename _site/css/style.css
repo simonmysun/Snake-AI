@@ -1,0 +1,38 @@
+#ai-box {
+    width: 100%;
+    height: 285px;
+    background-color: #eee;
+    padding: 15px 10px 15px 10px;
+}
+
+#ai {
+    width: 100%;
+    height: 185px;
+}
+
+#operator {
+    padding: 10px;
+    margin-bottom: 0px;
+}
+
+#playground-box {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    background-color: #eee;
+    padding: 15px 10px 15px 10px;
+}
+
+#playground {
+}
+
+#result-log {
+    height: 300px;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    width: hidden;
+}
+
+#score {
+    font-size: 80px;
+}

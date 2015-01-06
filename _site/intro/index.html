@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>主页 - Snake-AI | 中国海洋大学 “华为杯”第三届程序设计竞赛 - 第二轮</title>
+    <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="/Snake-AI/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/Snake-AI/css/introjs.min.css" rel="stylesheet">
+    <link href="/Snake-AI/css/style.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="jumbotron">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8">
+	    <h1>
+	      Snake AI
+	    </h1>
+	    <p class="lead">
+	      A sandbox for testing AI code of snake game
+	    </p>
+	    <p>
+	      <a class="btn btn-lg btn-success" href="/Snake-AI/intro/" role="button">
+	        Learn more
+	      </a>
+	    </p>
+          </div>
+          <div class="col-sm-4">
+            <img src="/Snake-AI/img/huaweilogo.png" class="img-responsive" style="height: 233px;">
+          </div>
+        </div>
+        <ul class="nav nav-tabs">
+          <li><a href="/Snake-AI/home/">Home</a></li>
+          <li><a href="/Snake-AI/intro/">Intro</a></li>
+          <li><a href="/Snake-AI/intro/rule/">Rules</a></li>
+          <li><a href="/Snake-AI/game/">Sandbox</a></li>
+          <li><a href="/Snake-AI/intro/api/">APIs</a></li>
+          <li><a href="/Snake-AI/intro/demo/">Demo</a></li>
+          <li><a href="/Snake-AI/LICENSE">License</a></li>
+        </ul>
+      </div>
+    </div>
+
+<div class="container">
+  <h1 id="section">贪吃蛇人工智能算法评测平台</h1>
+
+<p>一个可以评测应用于贪吃蛇的智能算法的沙箱程序. (限 Chrome 浏览)</p>
+
+<h2 id="section-1">背景</h2>
+
+<p>一条贪婪的蛇被困在有限大小的矩形空间内, 吃 295 个食物才能被释放. 可是蛇越吃越长, 越长就越没有空间移动, 请帮助它决定如何移动才能重获自由. </p>
+
+<h2 id="section-2">规则</h2>
+
+<p>游戏规则与传统贪吃蛇近似, 不过蛇将被允许 <code>10000</code> 次, <code>300</code> 秒的时间用来移动. 计分方式为每一次死亡计当前一回合分数的平方. 若贪吃蛇能够占满整个空间, 则当前回合计分加倍. </p>
+
+<p>点击查看<a href="/Snake-AI/intro/rule/">详细规则</a>. </p>
+
+<h2 id="section-3">参赛入门</h2>
+
+<p>本评测平台接收 JavaScript 代码, 点击<a href="http://bonsaiden.github.io/JavaScript-Garden/zh/">此处</a>学习 JavaScript. </p>
+
+<h3 id="section-4">选手应该提供什么?</h3>
+
+<p>选手应提供一个闭包函数. 该函数将在游戏开始时被载入并运行. 函数应以运动场的大小信息 <code>w</code> 和 <code>h</code> 为参数, 函数名应为 <code>createThink</code>, 并返回每次移动前调用的思考函数. 返回的函数应以游戏状态为参数, 将在每次移动前调用. </p>
+
+<pre><code>function createThink(w, h) {
+    ...
+    var think = function(game) {
+        ...
+    }
+    return think;
+}
+</code></pre>
+
+<p>或者使用匿名函数. </p>
+
+<pre><code>function createThink(w, h) {
+    ...
+    return function(game) {
+        ...
+    }
+}
+</code></pre>
+
+<p>函数 <code>createThink</code> 在游戏开始时将被调用. </p>
+
+<pre><code>var think = new createThink(w, h);
+</code></pre>
+
+<h4 id="section-5">例子</h4>
+
+<p>写一个向右向下行进的 AI 脚本: </p>
+
+<pre><code>function createThink(w, h) {
+    var dir = 'right'
+    return function(game) {
+        if(dir === 'right') {
+            dir = 'down';
+            return dir;
+        } else {
+            dir = 'right';
+            return dir;
+        }
+    }
+}
+</code></pre>
+
+<p>这里返回的函数 <code>think</code> 将在每次移动前调用. </p>
+
+<h3 id="section-6">选手可以使用什么?</h3>
+
+<p><code>w</code> 和 <code>h</code> 将在游戏开始是提供, 游戏状态将在每次调用智能脚本时调用. </p>
+
+<p>游戏状态是一个对象, 包括蛇的信息, 食物的信息和一些接口函数. </p>
+
+<pre><code>{
+    snake: [
+        {
+            x: ...
+            ,y: ...
+        }
+        ...
+    ]
+    ,food: [
+        {
+            x: ...
+            ,y: ...
+        }
+    ]
+}
+</code></pre>
+
+<p>详见<a href="/Snake-AI/intro/api/">接口文档</a>和<a href="/Snake-AI/intro/demo/">示例代码</a>. </p>
+
+<h2 id="section-7">评测沙箱使用方法</h2>
+
+<h3 id="section-8">界面布局</h3>
+
+<p>左侧为显示游戏状态的区域, 上半部分显示移动场, 贪吃蛇和食物, 背景分数为当前回合得分, 下方数字为游戏总得分. </p>
+
+<p>右侧为代码输入和控制面板, <code>Toggle mode</code> 按钮切换运行速度, <code>Load</code> 按钮装载代码, <code>Start</code> 按钮开始运行, <code>Reset</code> 重置游戏和代码</p>
+
+<h3 id="section-9">操作说明</h3>
+
+<p>选手将自己的代码输入至文本框之后, 点击 <code>Load</code> 按钮, 随后点击 <code>Start</code> 按钮即可开始运行. </p>
+
+<h3 id="section-10">调试</h3>
+
+<p>由于我们的评测平台在线版本使用 web worker 机制防止选手作弊, 所以调试时需要在 Chrome 中打开 worker 调试面板, <a href="http://www.nczonline.net/blog/2009/08/25/web-workers-errors-and-debugging/">这里</a>和<a href="http://blog.csdn.net/donghao526/article/details/9664701">这里</a>讲述了 web worker 中代码的调试方法. </p>
+
+<p>调试时打开 Chrome 开发者工具, 装载代码(点击 <code>Load</code> )完毕后, 在 <code>Sources</code> 标签中的右侧点击 <code>Workers</code> 打开 Web Worker 调试窗口, 这里的 <code>Source</code> 标签中, <code>(no domain)</code> 下的代码即为调试选手提交的脚本. </p>
+
+<p>_注意: 每次装载都会产生新的 Web Worker 线程, 需要重新打开 Web Worker 调试窗口. _</p>
+
+<p>(不推荐)我们也有<a href="/Snake-AI/dev.zip">本地调试版本(点击下载)</a>可供大家进行调试. 评测环境与调试环境几乎相同, 但有一些变量被占用, 为防止运行结果出现偏差请务必在提交代码前在<a href="/Snake-AI/game/">在线沙箱</a>中运行. </p>
+
+<h2 id="faq">FAQ</h2>
+
+<ol>
+  <li>
+    <p>使用什么语言编写脚本? 
+&gt; Javascript. </p>
+  </li>
+  <li>
+    <p>如何提交代码
+&gt; 发送邮件至主办方. </p>
+  </li>
+  <li>
+    <p>我可以复制 / 修改 Snake-AI 的代码并自己运行吗? 
+&gt; 可以. </p>
+  </li>
+</ol>
+
+<h2 id="section-11">关于</h2>
+
+<p>作者: Simonmysun</p>
+
+<!--鸣谢: Friends-->
+
+<h2 id="copyright--licence">版权和开放许可 - Copyright &amp; Licence</h2>
+
+<h3 id="code-of-the-platform">平台代码 - Code of the platform</h3>
+
+<p>MIT</p>
+
+<h3 id="code-of-participant">使用者提交的代码 - Code of participant</h3>
+<p>使用者提交的内容指从本网站可以下载的所有数据. </p>
+
+<p>Code of participant are all data that can be downloaded from the website. </p>
+
+<p>你可以用这些代码在本网站上运行, 也可以缓存或在本地储存. 但除非原作者(们)许可, 你不能出于任何目的修改或重新发布这些代码. 为了本地测试和实验, 你可以使用你自己修改的而非其他人修改的任何版本的 Snake-AI. </p>
+
+<p>You may use the code to play the original Snake-AI as served from this website, and you may cache or copy it locally. However, you may not modify or redistribute the code for any purpose unless you have a separate license from the owner(s) to do so. To enable local testing and experimenting, you may use the code with versions of Snake-AI that you yourself have modified, but not if the modifications were made by someone else.</p>
+
+</div>
+
+    
+    <script src="/Snake-AI/js/jquery-2.0.3.min.js"></script>
+    <script src="/Snake-AI/js/bootstrap.min.js"></script>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-49936449-1', 'simonmysun.github.io');
+      ga('send', 'pageview');
+      
+    </script>
+  </body>
+</html>
