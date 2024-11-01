@@ -98,7 +98,7 @@ title: 规则
 	        score = 0;
 	        init();
 	        if(tick >= steps) {
-	            showShare();
+	            console.log("Gameover")
 	        }
 	    }
 	    return;
