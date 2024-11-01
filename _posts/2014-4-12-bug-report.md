@@ -11,7 +11,7 @@ title: 本地调试版存在 bug, 请及时更新
 # 菜单栏链接失效; 
 
 最新的本地调试版在此下载(界面与在线版有不一样的地方): 
-http://simonmysun.github.io/Snake-AI/dev.zip
+~~http://simonmysun.github.io/Snake-AI/dev.zip~~ (已不可用，请使用在线版)
 
 对于这些 bug 给大家带来的麻烦和不便深表歉意. 
 
