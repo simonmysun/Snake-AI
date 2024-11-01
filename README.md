@@ -8,7 +8,7 @@
 
 ## 使用方式
 
-请阅读[游戏介绍](https://maoyin.eu/Snake-AI/intro/)和[游戏规则](https://maoyin.eu/Snake-AI/intro/rules/)后依据[API 说明](https://maoyin.eu/Snake-AI/api/)编写代码在[沙盒](https://maoyin.eu/Snake-AI/game/)中运行并查看分数。
+请阅读[游戏介绍](https://maoyin.eu/Snake-AI/intro/)和[游戏规则](https://maoyin.eu/Snake-AI/intro/rule/)后依据[API 说明](https://maoyin.eu/Snake-AI/intro/api/)编写代码在[沙盒](https://maoyin.eu/Snake-AI/game/)中运行并查看分数。
 
 ## License
 
